@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+p {
+	background: green;
+}
+#napis {
+	background-color: red;
+}
+.klasa {
+	color: blue;
+	background: yellow;
+}
+header, nav, main {
+	display: block;
+}
