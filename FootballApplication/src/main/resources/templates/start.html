@@ -1,11 +1,95 @@
 <!DOCTYPE HTML>
 <html lang="pl-PL">
 <head>
-<title>Main Page of Application</title>
+<title>Web Application to Football points</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="../static/css/start.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css">
 </head>
 <body>
 
+	<!-- Add some function to hidde icon after scrolling
+	Add some left or right menu -->
+
+	<!-- Start of top navigation menu -->
+	<nav class="navbar navbar-expand-md navbar-light" id="navigationMenu">
+		<a class="navbar-brand" href="#"><img
+			src="https://img.uefa.com/imgml/uefaorg/new/logo.png" width="30">UEFA</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarNav">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav">
+				<li class="nav-item"><a class="nav-link" href="#">Link1</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">Link2</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">Link3</a></li>
+			</ul>
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item"><a class="nav-link" href="#">About me</a></li>
+			</ul>
+		</div>
+	</nav>
+	<!--End of top navigation menu-->
+
+	<!-- Main content -->
+	<div class="container-fluid">
+		<div class="row" id="mainRow">
+
+			<!-- Left Menu -->
+			<div class="col-sm-2" id="leftMenu">
+				<div class="list-group panel">
+					<div id="leftNavigation">
+						<ul class="navbar-nav">
+							<li class="navbar-item"><a class="nav-link" href="#">LeftLink1</a></li>
+							<li class="navbar-item"><a class="nav-link" href="#">LeftLink2</a></li>
+							<li class="navbar-item"><a class="nav-link" href="#">LeftLink3</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<!-- Main Content -->
+			<div class="col-sm-8" id="mainContent">
+				<div class="row">
+					<div class="col-sm-4">Check the results</div>
+					<div class="col-sm-4">Check you team</div>
+					<div class="col-sm-4">Check UEFA ranking</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-3">
+						<div class="card" id="card1">
+							<img class="card-img-top" src="../static/images/championsLeaugeCup.jpg"
+								alt="Champions Leauge Trophy" id="pictureChampionsLeaugeTrophy">
+							<div class="card-body">Some text to describe image.</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Right Column-->
+			<div class="col-sm-2" id="rightMenu">
+				<div class="list-group panel">
+					<div id="leftNavigation">
+						<ul class="navbar-nav">
+							<li class="navbar-item"><a class="nav-link" href="#">RifhtLink1</a></li>
+							<li class="navbar-item"><a class="nav-link" href="#">RifhtLink2</a></li>
+							<li class="navbar-item"><a class="nav-link" href="#">RifhtLink3</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Only scripts -->
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"></script>
 </body>
+
 </html>
