@@ -1,10 +1,11 @@
 <!DOCTYPE HTML>
-<html lang="pl-PL">
+<html lang="pl-PL" xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>Web Application to Football points</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="../static/css/start.css">
+<link rel="stylesheet" href="../static/css/start.css"
+	th:href="@{/css/start.css}">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css">
 </head>
@@ -61,7 +62,9 @@
 				<div class="row">
 					<div class="col-sm-3">
 						<div class="card" id="card1">
-							<img class="card-img-top" src="../static/images/championsLeaugeCup.jpg"
+							<img class="card-img-top"
+								src="../static/images/championsLeaugeCup.jpg"
+								th:src="@{/images/championsLeaugeCup.jpg}"
 								alt="Champions Leauge Trophy" id="pictureChampionsLeaugeTrophy">
 							<div class="card-body">Some text to describe image.</div>
 						</div>
@@ -74,9 +77,9 @@
 				<div class="list-group panel">
 					<div id="leftNavigation">
 						<ul class="navbar-nav">
-							<li class="navbar-item"><a class="nav-link" href="#">RifhtLink1</a></li>
-							<li class="navbar-item"><a class="nav-link" href="#">RifhtLink2</a></li>
-							<li class="navbar-item"><a class="nav-link" href="#">RifhtLink3</a></li>
+							<li class="navbar-item"><a class="nav-link" href="#">RightLink1</a></li>
+							<li class="navbar-item"><a class="nav-link" href="#">RightLink2</a></li>
+							<li class="navbar-item"><a class="nav-link" href="#">RightLink3</a></li>
 						</ul>
 					</div>
 				</div>
