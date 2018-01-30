@@ -10,8 +10,8 @@ import javax.persistence.Id;
 @Entity
 public class Match {
 
-	// Checking other type of strategy=GenerationType
-	// need to read more about generation value
+	// *Checking other type of strategy=GenerationType
+	// *need to read more about generation value
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -22,7 +22,7 @@ public class Match {
 	private int awayTeamScore;
 
 	// this constructor is only for JPA use
-	// need to read more
+	// *need to read more
 	protected Match() {
 	}
 
