@@ -27,4 +27,10 @@ public class MatchService {
 			listOfGames.add(game);
 		return listOfGames;
 	}
+	public List<Match> findAll(){
+		List<Match> listOfGames = new ArrayList<>();
+		for(Match game: matchRepository.findAll())
+			listOfGames.add(game);
+		return listOfGames;
+	}
 }
