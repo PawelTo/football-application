@@ -1,33 +1,40 @@
 <!DOCTYPE html>
-<html lang="pl-PL">
+<html lang="pl-PL" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="../static/css/testing.css">
-<title>Insert title here</title>
+<title>Test file to show data from DB</title>
 </head>
 <body>
-	<div id="header">
-		<nav>
-			Nawigacja
-			<ul>
-				<li><a href="#">Strona Główna</a></li>
-				<li><a>Element listy nieuporządkowanej 1</a></li>
-				<li><a>Element listy nieuporządkowanej 2</a></li>
-			</ul>
-		</nav>
-	</div>
 	<div id="main">
-		<p>Random text</p>
-		<p id="napis">Napis</p>
-		<p id="napis" class="klasa">Random text2</p>
-		<input type="text" value="default value">
-		<article>
-			<header>
-				<h1>Tytuł</h1>
-			</header>
-			<p>Tekst artykułu</p>
-			<footer> Autor </footer>
-		</article>
+		<h1>Results:</h1>
+		<h2>
+			<span th:text="'Match: ' + ${message}"></span>
+		</h2>
+	</div>
+	<div id="tabela">
+		<h1>Results in table</h1>
+		<table>
+			<thead>
+				<tr>
+					<th>Home Team</th>
+					<th>Date Of Game</th>
+					<th>Away Team</th>
+					<th>Home Team Goals</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="m : ${message}">
+					<td th:text="${m.homeTeam}">Random Text</td>
+					<td th:text="${m.dateOfGame}">Random Text2</td>
+					<!--
+					Try to change date format
+					 <td th:text="${#temporals.format(m.dateOfGame,'dd-MM-yyyy')}">Random Text2</td>
+					 -->
+					<td th:text="${m.awayTeam}"></td>
+					<td th:text="${m.homeTeamScore}"></td>
+			</tbody>
+		</table>
 	</div>
 	<div id="footer">
 		<form>
@@ -37,7 +44,11 @@
 				value="Zatwierdz"></label>
 		</form>
 		<button type="button" onclick="myFunction()">Try it</button>
-		<p>Napis:<script type="text/javascript" class="myFunction2()"></script>
+		<p>
+			Napis:
+			<script type="text/javascript" class="myFunction2()"></script>
+		</p>
+	</div>
 	<script src="../static/js/testing.js"></script>
 </body>
 </html>

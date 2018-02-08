@@ -58,8 +58,14 @@
 		<!-- Dependency to make connection to Postgres Database -->
 		<dependency>
 			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>			
+			<artifactId>postgresql</artifactId>
 		</dependency>
+
+		<!-- Dependency add to fix bug with java.time.LocalDate deserialization-->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-java8</artifactId>
+		</dependency>		
 	</dependencies>
 
 	<build>

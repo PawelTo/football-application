@@ -15,6 +15,8 @@ public class Match {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	// LocalDate need additional dependency to deserialization, which isn't
+	// necessary for java.sql.Date and java.util.Date
 	private LocalDate dateOfGame;
 	private String homeTeam;
 	private String awayTeam;
