@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pl-PL" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="../static/css/testing.css">
+<title>File to update data</title>
+</head>
+<body>
+	<div>
+		<h3>Place to update match</h3>
+		<form action="#" th:action="@{/save}" method="post"
+			th:object="${match}">
+			<input th:value="${match.id}" th:name="id" th:id="id" type="hidden">
+			<div class="form-group">
+				<label>Home Team</label> <input th:value="${match.homeTeam}" th:name="homeTeam">
+			</div>
+			<div class="form-group">
+				<label>Away Team</label> <input th:value="${match.awayTeam}" th:name="awayTeam">
+			</div>
+			<div class="form-group">
+				<label>Home Team Score</label> <input th:value="${match.homeTeamScore}" th:name="homeTeamScore">
+			</div>
+			<div class="form-group">
+				<label>Away Team Score</label> <input th:value="${match.awayTeamScore}" th:name="awayTeamScore">
+			</div>
+			<div class="form-group">
+				<label>Date Of Game (DD-MM-RRRR)</label> <input type="text" th:value="${match.dateOfGame}" th:name="dateOfGame">
+			</div>
+			<p>
+				<input type="submit" value="Update Game" />
+		</form>
+	</div>
+</body>
+</html>

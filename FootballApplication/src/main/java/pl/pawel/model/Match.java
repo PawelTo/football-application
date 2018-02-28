@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 public class Match {
 
@@ -15,8 +17,12 @@ public class Match {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	// LocalDate need additional dependency to deserialization, which isn't
-	// necessary for java.sql.Date and java.util.Date
+	/**
+	 * LocalDate need additional dependency to deserialization, which isn't
+	 * necessary for java.sql.Date and java.util.Date
+	 * Annotation, which allow me to get date from thymeleaf input form
+	 */
+	@DateTimeFormat(pattern="dd-MM-yyyy")
 	private LocalDate dateOfGame;
 	private String homeTeam;
 	private String awayTeam;
@@ -25,7 +31,8 @@ public class Match {
 
 	// this constructor is only for JPA use
 	// *need to read more
-	protected Match() {
+	//I changed protected to public constructor, because it's needed to be used  in controller 
+	public Match() {
 	}
 
 	// this constructor is used to create instance, which will be saved in database

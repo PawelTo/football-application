@@ -14,7 +14,7 @@ public class MatchService {
 
 	//using Dependency Injection to get Repository layer
 	private final MatchRepository matchRepository;
-	
+
 	@Autowired
 	public MatchService(MatchRepository matchRepository) {
 		this.matchRepository = matchRepository;
@@ -27,10 +27,20 @@ public class MatchService {
 			listOfGames.add(game);
 		return listOfGames;
 	}
+	
+	public Match findMatch(long id) {
+		//class only for Test Controller, later should be change
+		Match gra = matchRepository.findById(id);
+		return gra;
+	}
 	public List<Match> findAll(){
 		List<Match> listOfGames = new ArrayList<>();
 		for(Match game: matchRepository.findAll())
 			listOfGames.add(game);
 		return listOfGames;
+	}
+	
+	public void save(Match match) {
+		matchRepository.save(match);
 	}
 }
