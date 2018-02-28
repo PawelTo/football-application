@@ -6,12 +6,6 @@
 <title>Test file to show data from DB</title>
 </head>
 <body>
-	<div id="main">
-		<h1>Results:</h1>
-		<h2>
-			<span th:text="'Match: ' + ${message}"></span>
-		</h2>
-	</div>
 	<div id="tabela">
 		<h1>Results in table</h1>
 		<table>
@@ -21,10 +15,11 @@
 					<th>Date Of Game</th>
 					<th>Away Team</th>
 					<th>Home Team Goals</th>
+					<th>Away Team Goals</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="m : ${message}">
+				<tr th:each="m : ${game}">
 					<td th:text="${m.homeTeam}">Random Text</td>
 					<td th:text="${m.dateOfGame}">Random Text2</td>
 					<!--
@@ -33,22 +28,9 @@
 					 -->
 					<td th:text="${m.awayTeam}"></td>
 					<td th:text="${m.homeTeamScore}"></td>
+					<td th:text="${m.awayTeamScore}"></td>
 			</tbody>
 		</table>
 	</div>
-	<div id="footer">
-		<form>
-			<label>Login <input type="text" value="Nick"></label> <label>Password
-				<input type="password">
-			</label><br> <label>Potwierdzenie <input type="submit"
-				value="Zatwierdz"></label>
-		</form>
-		<button type="button" onclick="myFunction()">Try it</button>
-		<p>
-			Napis:
-			<script type="text/javascript" class="myFunction2()"></script>
-		</p>
-	</div>
-	<script src="../static/js/testing.js"></script>
 </body>
 </html>
