@@ -16,6 +16,8 @@
 					<th>Away Team</th>
 					<th>Home Team Goals</th>
 					<th>Away Team Goals</th>
+					<th>Attendance</th>
+					<th>Competition Name</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -29,6 +31,8 @@
 					<td th:text="${m.awayTeam}"></td>
 					<td th:text="${m.homeTeamScore}"></td>
 					<td th:text="${m.awayTeamScore}"></td>
+					<td th:text="${m.attendance}"></td>
+					<td th:text="${m.competition.CompetitionName}"></td>
 			</tbody>
 		</table>
 	</div>

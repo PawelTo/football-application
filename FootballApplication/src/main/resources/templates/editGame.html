@@ -26,7 +26,12 @@
 			<div class="form-group">
 				<label>Date Of Game (DD-MM-RRRR)</label> <input type="text" th:value="${match.dateOfGame}" th:name="dateOfGame">
 			</div>
-			<p>
+			<div class="form-group">
+				<label>Attendance</label> <input th:value="${match.attendance}" th:name="attendance">
+			</div>
+			<div class="form-group">
+				<label>Competition_Id</label> <input th:value="${match.competition.Id}" th:name="competition">
+			</div>
 				<input type="submit" value="Update Game" />
 		</form>
 	</div>
