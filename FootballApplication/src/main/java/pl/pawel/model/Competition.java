@@ -14,17 +14,16 @@ import javax.persistence.OneToMany;
 public class Competition {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String competitionName;
 	private int competitionImportance;
-	@OneToMany(mappedBy = "competition", cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+	@OneToMany(mappedBy = "competition", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Match> games;
-	
-	
+
 	public Competition() {
 	}
-	
+
 	public Competition(String competitionName, int competitionImportance) {
 		this.competitionName = competitionName;
 		this.competitionImportance = competitionImportance;
@@ -33,7 +32,7 @@ public class Competition {
 	@Override
 	public String toString() {
 		return "Competition [id=" + id + ", competitionName=" + competitionName + ", competitionImportance="
-				+ competitionImportance + ", games=" + games + "]";
+				+ competitionImportance + ", games=]";
 	}
 
 	public Long getId() {

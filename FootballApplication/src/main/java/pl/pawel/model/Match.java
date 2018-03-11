@@ -21,13 +21,17 @@ public class Match {
 	private Long id;
 	/**
 	 * LocalDate need additional dependency to deserialization, which isn't
-	 * necessary for java.sql.Date and java.util.Date
-	 * Annotation, which allow me to get date from thymeleaf input form
+	 * necessary for java.sql.Date and java.util.Date Annotation, which allow me to
+	 * get date from thymeleaf input form
 	 */
-	@DateTimeFormat(pattern="dd-MM-yyyy")
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private LocalDate dateOfGame;
-	private String homeTeam;
-	private String awayTeam;
+	@ManyToOne
+	@JoinColumn(name = "home_club_id")
+	private Club homeTeam;
+	@ManyToOne
+	@JoinColumn(name = "away_club_id")
+	private Club awayTeam;
 	private int homeTeamScore;
 	private int awayTeamScore;
 	@ManyToOne
@@ -37,25 +41,28 @@ public class Match {
 
 	// this constructor is only for JPA use
 	// *need to read more
-	//I changed protected to public constructor, because it's needed to be used in controller 
+	// I changed protected to public constructor, because it's needed to be used in
+	// controller
 	public Match() {
 	}
 
 	// this constructor is used to create instance, which will be saved in database
-	public Match(LocalDate dateOfGame, String homeTeam, String awayTeam, int homeTeamScore, int awayTeamScore, int attendance, Competition competition) {
+	public Match(LocalDate dateOfGame, Club homeTeam, Club awayTeam, int homeTeamScore, int awayTeamScore,
+			Competition competition, int attendance) {
 		this.dateOfGame = dateOfGame;
 		this.homeTeam = homeTeam;
 		this.awayTeam = awayTeam;
 		this.homeTeamScore = homeTeamScore;
 		this.awayTeamScore = awayTeamScore;
-		this.attendance = attendance;
 		this.competition = competition;
+		this.attendance = attendance;
 	}
 
 	@Override
 	public String toString() {
-		return "Match: [id= " + id + ", dateOG= " + dateOfGame + ", hTeam= " + homeTeam + ", aTeam= " + awayTeam
-				+ ", hTScore= " + homeTeamScore + ", aTScore= " + awayTeamScore + ", attendance= " +attendance + ", competition= "+ competition.getId()+ "]";
+		return "Match [id=" + id + ", dateOfGame=" + dateOfGame + ", homeTeam=" + homeTeam + ", awayTeam=" + awayTeam
+				+ ", homeTeamScore=" + homeTeamScore + ", awayTeamScore=" + awayTeamScore + ", competition="
+				+ competition + ", attendance=" + attendance + "]";
 	}
 
 	public Long getId() {
@@ -72,22 +79,6 @@ public class Match {
 
 	public void setDateOfGame(LocalDate dateOfGame) {
 		this.dateOfGame = dateOfGame;
-	}
-
-	public String getHomeTeam() {
-		return homeTeam;
-	}
-
-	public void setHomeTeam(String homeTeam) {
-		this.homeTeam = homeTeam;
-	}
-
-	public String getAwayTeam() {
-		return awayTeam;
-	}
-
-	public void setAwayTeam(String awayTeam) {
-		this.awayTeam = awayTeam;
 	}
 
 	public int getHomeTeamScore() {
@@ -120,5 +111,21 @@ public class Match {
 
 	public void setAttendance(int attendance) {
 		this.attendance = attendance;
+	}
+
+	public Club getHomeTeam() {
+		return homeTeam;
+	}
+
+	public void setHomeTeam(Club homeTeam) {
+		this.homeTeam = homeTeam;
+	}
+
+	public Club getAwayTeam() {
+		return awayTeam;
+	}
+
+	public void setAwayTeam(Club awayTeam) {
+		this.awayTeam = awayTeam;
 	}
 }
