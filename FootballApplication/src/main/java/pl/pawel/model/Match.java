@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 public class Match {
 
@@ -21,6 +23,7 @@ public class Match {
 	private Long id;
 	/**
 	 * LocalDate need additional dependency to deserialization, which isn't
+
 	 * necessary for java.sql.Date and java.util.Date Annotation, which allow me to
 	 * get date from thymeleaf input form
 	 */
