@@ -28,7 +28,7 @@ public class MatchService {
 		return listOfGames;
 	}
 	
-	public Match findMatch(long id) {
+	public Match findMatchByID(long id) {
 		//class only for Test Controller, later should be change
 		Match gra = matchRepository.findById(id);
 		return gra;

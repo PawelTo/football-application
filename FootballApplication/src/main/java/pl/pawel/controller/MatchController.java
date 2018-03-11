@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import pl.pawel.model.Competition;
 import pl.pawel.model.Match;
 import pl.pawel.service.MatchService;
 
@@ -70,7 +71,7 @@ public class MatchController {
 	public String editMatch(Model model) {
 		// method to edit game
 		// value of editing id=6 is only temporary, later it will be set by user
-		Match gameToUpdate = matchService.findMatch(6);
+		Match gameToUpdate = matchService.findMatchByID(6);
 		model.addAttribute(gameToUpdate);
 		return "editGame";
 	}
