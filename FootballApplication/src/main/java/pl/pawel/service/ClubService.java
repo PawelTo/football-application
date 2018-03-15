@@ -8,7 +8,7 @@ import pl.pawel.repository.ClubRepository;
 
 @Service
 public class ClubService {
-
+	
 	@Autowired
 	private ClubRepository clubRepository;
 	

@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,19 +14,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import pl.pawel.model.Competition;
 import pl.pawel.model.Match;
 import pl.pawel.service.MatchService;
+
+// If you send data to HTML views via HttpServletRequest.setAttribute the name
+// have to be the same as the name of the object in HTML file, if you use
+// Model.addAttribute - without a name of object, the name of the object in HTML
+// file have to be the same like Entity name, or you can define name be using
+// name attribute (like in the setAttribute)
 
 @Controller
 public class MatchController {
 
-	// If you send data to HTML views via HttpServletRequest.setAttribute the name
-	// have to be the same as the name of the object in HTML file, if you use
-	// Model.addAttribute - without a name of object, the name of the object in HTML
-	// file have to be the same like Entity name, or you can define name be using
-	// name attribute (like in the setAttribute)
-	
+	private static Logger logger = LoggerFactory.getLogger(MatchController.class);
 	/**
 	 * I used dependency injection via field (to try other opportunity), despite the
 	 * fact that in MatchService I used injection via constructor (It should be only
@@ -40,6 +42,7 @@ public class MatchController {
 		// method to show all Matches from DB
 		List<Match> listOfMatches = new ArrayList<>();
 		listOfMatches = matchService.findAll();
+		logger.info("List of Games: "+listOfMatches);
 		request.setAttribute("game", listOfMatches);
 		return "showGames";
 	}
