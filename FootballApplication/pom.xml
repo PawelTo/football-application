@@ -61,11 +61,18 @@
 			<artifactId>postgresql</artifactId>
 		</dependency>
 
-		<!-- Dependency add to fix bug with java.time.LocalDate deserialization-->
+		<!-- Dependency add to fix bug with java.time.LocalDate deserialization -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-java8</artifactId>
-		</dependency>		
+		</dependency>
+
+		<!-- Dependency to operate with data from excel file -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>3.17</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -76,7 +83,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
-
-
 </project>

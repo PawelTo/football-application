@@ -8,4 +8,6 @@ import pl.pawel.model.Competition;
 @Repository
 public interface CompetitionRepository extends CrudRepository<Competition, Long>{
 
+	Competition findByCompetitionName(String nameOfCompetition);
+
 }

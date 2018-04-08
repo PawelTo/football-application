@@ -8,4 +8,6 @@ import pl.pawel.model.Club;
 @Repository
 public interface ClubRepository extends CrudRepository<Club, Long> {
 
+	Club findByClubName(String nameOfClub);
+
 }

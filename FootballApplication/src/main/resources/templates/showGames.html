@@ -22,13 +22,13 @@
 			</thead>
 			<tbody>
 				<tr th:each="m : ${game}">
-					<td th:text="${m.homeTeam}">Random Text</td>
+					<td th:text="${m.homeTeam.ClubName}">Random Text</td>
 					<td th:text="${m.dateOfGame}">Random Text2</td>
 					<!--
 					Try to change date format
 					 <td th:text="${#temporals.format(m.dateOfGame,'dd-MM-yyyy')}">Random Text2</td>
 					 -->
-					<td th:text="${m.awayTeam}"></td>
+					<td th:text="${m.awayTeam.ClubName}"></td>
 					<td th:text="${m.homeTeamScore}"></td>
 					<td th:text="${m.awayTeamScore}"></td>
 					<td th:text="${m.attendance}"></td>

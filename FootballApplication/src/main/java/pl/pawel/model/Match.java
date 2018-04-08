@@ -63,9 +63,9 @@ public class Match {
 
 	@Override
 	public String toString() {
-		return "Match [id=" + id + ", dateOfGame=" + dateOfGame + ", homeTeam=" + homeTeam + ", awayTeam=" + awayTeam
+		return "Match " + "[id=" + id + ", dateOfGame=" + dateOfGame + ", homeTeam=" + homeTeam.getId() + ", awayTeam=" + awayTeam.getId()
 				+ ", homeTeamScore=" + homeTeamScore + ", awayTeamScore=" + awayTeamScore + ", competition="
-				+ competition + ", attendance=" + attendance + "]";
+				+ competition.getId() + ", attendance=" + attendance  + "]";
 	}
 
 	public Long getId() {
