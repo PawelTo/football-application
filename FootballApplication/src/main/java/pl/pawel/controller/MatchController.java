@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import pl.pawel.model.Match;
+import pl.pawel.service.MatchFromData;
 import pl.pawel.service.MatchService;
+import pl.pawel.service.ReadFile;
 
 // If you send data to HTML views via HttpServletRequest.setAttribute the name
 // have to be the same as the name of the object in HTML file, if you use
@@ -34,6 +36,9 @@ public class MatchController {
 	 */
 	@Autowired
 	private MatchService matchService;
+	
+	@Autowired
+	private MatchFromData mfData;
 
 	// Get vs Post, ModelAttribute vs RequestParm
 
@@ -75,7 +80,20 @@ public class MatchController {
 		// method to edit game
 		// value of editing id=6 is only temporary, later it will be set by user
 		Match gameToUpdate = matchService.findMatchByID(6);
-		model.addAttribute(gameToUpdate);
+		model.addAttribute("match", gameToUpdate);
 		return "editGame";
+	}
+	
+	@GetMapping("/file")
+	public String readGameFromFile() {
+		//method to test read data from file, later it will file can be selected
+		List<String[]> dataFromFile = new ReadFile().getDataFromFile();
+		for(int i =1;i<dataFromFile.size();i++) {
+			mfData.setDataFromFile(dataFromFile.get(i));
+			Match game = mfData.createMatch();
+			logger.info("Row - "+i + " - match: "+game);
+			matchService.save(game);
+		}
+		return "start";
 	}
 }

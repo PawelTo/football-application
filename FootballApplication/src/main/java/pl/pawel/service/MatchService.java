@@ -22,15 +22,12 @@ public class MatchService {
 	
 	//*Consider pros and cons other kind of collections
 	public List<Match> findByHomeTeam(String homeTeam){
-		List<Match> listOfGames = new ArrayList<>();
-		for(Match game: matchRepository.findByHomeTeam(homeTeam))
-			listOfGames.add(game);
+		List<Match> listOfGames = matchRepository.findByHomeTeam(homeTeam);
 		return listOfGames;
 	}
 	
 	public Match findMatchByID(long id) {
-		//class only for Test Controller, later should be change
-		Match gra = matchRepository.findById(id);
+		Match gra = matchRepository.findOne(id);
 		return gra;
 	}
 	public List<Match> findAll(){

@@ -36,8 +36,8 @@ public class Club {
 	@Override
 	public String toString() {
 		return "Club [id=" + id + ", clubName=" + clubName + ", stadiumName=" + stadiumName + ", stadiumCapacity="
-				+ stadiumCapacity + ", matchesAsHomeTeam=" + matchesAsHomeTeam + ", matchesAsAwayTeam="
-				+ matchesAsAwayTeam + "]";
+				+ stadiumCapacity + ", matchesAsHomeTeam=" + matchesAsHomeTeam.size() + ", matchesAsAwayTeam="
+				+ matchesAsAwayTeam.size() + "]";
 	}
 
 	public Long getId() {
