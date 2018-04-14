@@ -6,8 +6,7 @@ import org.springframework.stereotype.Repository;
 import pl.pawel.model.Competition;
 
 @Repository
-public interface CompetitionRepository extends CrudRepository<Competition, Long>{
+public interface CompetitionRepository extends CrudRepository<Competition, Long>, CompetitionRepositoryCustom{
 
 	Competition findByCompetitionName(String nameOfCompetition);
-
 }
