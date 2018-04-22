@@ -2,10 +2,15 @@
 <html lang="pl-PL" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="../static/css/testing.css">
+<link rel="stylesheet" type="text/css" href="../static/css/testing.css" th:href="@{/css/testing.css}">
 <title>Test file to show data from DB</title>
 </head>
 <body>
+<h1>The Biggest score: </h1>
+<h5>Text with scores</h5>
+<button type="button" onclick="getDataFromHTML(5,6,7)" th:onclick="'javascript:getDataFromHTML(\''+ ${game} + '\');'">Check the highest score</button>
+<p id="description"><p>
+
 	<div id="tabela">
 		<h1>Results in table</h1>
 		<table>
@@ -36,5 +41,8 @@
 			</tbody>
 		</table>
 	</div>
+	
+	<!-- Only scripts -->
+	<script th:src= "@{/js/countGoals.js}" src= "../static/js/countGoals.js"></script>
 </body>
 </html>
