@@ -1,7 +1,9 @@
 package pl.pawel.controller;
 
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,6 +15,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import pl.pawel.model.Match;
 import pl.pawel.service.MatchFromData;
@@ -39,8 +43,6 @@ public class MatchController {
 	
 	@Autowired
 	private MatchFromData mfData;
-
-	// Get vs Post, ModelAttribute vs RequestParm
 
 	@GetMapping("/all")
 	public String getAllMatches(HttpServletRequest request) {
@@ -75,11 +77,14 @@ public class MatchController {
 		return "showGames";
 	}
 
+	/**Method to edit match
+	 * @param id - of game to edit - defaultValue = 1
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/editGame")
-	public String editMatch(Model model) {
-		// method to edit game
-		// value of editing id=6 is only temporary, later it will be set by user
-		Match gameToUpdate = matchService.findMatchByID(6);
+	public String editMatch(@RequestParam(defaultValue="1", required=true, name="id") int id, Model model) {
+		Match gameToUpdate = matchService.findMatchByID(id);
 		model.addAttribute("match", gameToUpdate);
 		return "editGame";
 	}
@@ -95,5 +100,5 @@ public class MatchController {
 			matchService.save(game);
 		}
 		return "start";
-	}
+	}	
 }

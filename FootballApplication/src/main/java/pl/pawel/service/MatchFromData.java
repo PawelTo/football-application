@@ -13,6 +13,10 @@ import pl.pawel.model.Match;
 import pl.pawel.repository.ClubRepository;
 import pl.pawel.repository.CompetitionRepository;
 
+/**Class to create Match using data from given Array of String data
+ * @author Pawel
+ *
+ */
 @Service
 public class MatchFromData {
 
