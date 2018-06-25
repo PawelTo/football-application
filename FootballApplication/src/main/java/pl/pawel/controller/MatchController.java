@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import pl.pawel.model.Match;
+import pl.pawel.service.CSVFileSaver;
+import pl.pawel.service.IFileSaver;
 import pl.pawel.service.MatchFromData;
 import pl.pawel.service.MatchService;
 import pl.pawel.service.ReadFile;
@@ -100,5 +102,14 @@ public class MatchController {
 			matchService.save(game);
 		}
 		return "start";
-	}	
+	}
+	
+	@GetMapping("/csv")
+	public String saveToCSV() {
+		CSVFileSaver fileToSaveData = new CSVFileSaver();
+		fileToSaveData.saveString("do zapisu"+"\n"+"nowa linnia");
+		Match game = matchService.findMatchByID(7);
+		fileToSaveData.saveMatch(game);
+		return "start";
+	}
 }
