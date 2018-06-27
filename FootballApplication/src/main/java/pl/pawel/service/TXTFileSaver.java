@@ -5,18 +5,14 @@ import java.io.IOException;
 
 import pl.pawel.model.Match;
 
-/**Class that enable saving data to CSV file
- * @author Pawel
- *
- */
-public class CSVFileSaver implements IFileSaver {
+public class TXTFileSaver implements IFileSaver{
 
 	private String separator = "	";
 	private String endOfLineMark = "\n";
 	private String path = "C:\\Users\\Pawel\\Desktop\\";
-	private String fileName = "CreatedFile.csv";
+	private String fileName = "CreatedFile.txt";
 	private FileWriter fileWriter;
-
+	
 	@Override
 	public void saveMatch(Match game) {
 		String gameToSave = this.matchToString(game);
@@ -38,4 +34,5 @@ public class CSVFileSaver implements IFileSaver {
 				.append(separator).append(game.getHomeTeamScore()).append(":").append(game.getAwayTeamScore());
 		return sb.toString();
 	}
+
 }
