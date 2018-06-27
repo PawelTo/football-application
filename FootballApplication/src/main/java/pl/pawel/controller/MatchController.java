@@ -20,10 +20,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import pl.pawel.model.Match;
 import pl.pawel.service.CSVFileSaver;
+import pl.pawel.service.ExcelFileWriter;
 import pl.pawel.service.IFileSaver;
 import pl.pawel.service.MatchFromData;
 import pl.pawel.service.MatchService;
 import pl.pawel.service.ReadFile;
+import pl.pawel.service.TXTFileSaver;
 
 // If you send data to HTML views via HttpServletRequest.setAttribute the name
 // have to be the same as the name of the object in HTML file, if you use
@@ -107,9 +109,12 @@ public class MatchController {
 	@GetMapping("/csv")
 	public String saveToCSV() {
 		CSVFileSaver fileToSaveData = new CSVFileSaver();
-		fileToSaveData.saveString("do zapisu"+"\n"+"nowa linnia");
 		Match game = matchService.findMatchByID(7);
 		fileToSaveData.saveMatch(game);
+		TXTFileSaver fileToSave = new TXTFileSaver();
+		fileToSave.saveMatch(game);
+		ExcelFileWriter excelToSave = new ExcelFileWriter();
+		excelToSave.saveMatch(game);
 		return "start";
 	}
 }
