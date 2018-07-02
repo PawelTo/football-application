@@ -44,7 +44,7 @@ public class MatchController {
 	 */
 	@Autowired
 	private MatchService matchService;
-	
+
 	@Autowired
 	private MatchFromData mfData;
 
@@ -53,7 +53,7 @@ public class MatchController {
 		// method to show all Matches from DB
 		List<Match> listOfMatches = new ArrayList<>();
 		listOfMatches = matchService.findAll();
-		logger.info("List of Games: "+listOfMatches);
+		logger.info("List of Games: " + listOfMatches);
 		request.setAttribute("game", listOfMatches);
 		return "showGames";
 	}
@@ -81,31 +81,40 @@ public class MatchController {
 		return "showGames";
 	}
 
-	/**Method to edit match
-	 * @param id - of game to edit - defaultValue = 1
+	/**
+	 * Method to edit match
+	 * 
+	 * @param id    - of game to edit - defaultValue = 1
 	 * @param model
 	 * @return
 	 */
 	@GetMapping("/editGame")
-	public String editMatch(@RequestParam(defaultValue="1", required=true, name="id") int id, Model model) {
+	public String editMatch(@RequestParam(defaultValue = "1", required = true, name = "id") int id, Model model) {
 		Match gameToUpdate = matchService.findMatchByID(id);
 		model.addAttribute("match", gameToUpdate);
 		return "editGame";
 	}
-	
+
+	/** TODO - need to improve
+	 * Method to read data from file
+	 * @return
+	 */
 	@GetMapping("/file")
 	public String readGameFromFile() {
-		//method to test read data from file, later it will file can be selected
+		// method to test read data from file, later it will file can be selected
 		List<String[]> dataFromFile = new ReadFile().getDataFromFile();
-		for(int i =1;i<dataFromFile.size();i++) {
+		for (int i = 1; i < dataFromFile.size(); i++) {
 			mfData.setDataFromFile(dataFromFile.get(i));
 			Match game = mfData.createMatch();
-			logger.info("Row - "+i + " - match: "+game);
+			logger.info("Row - " + i + " - match: " + game);
 			matchService.save(game);
 		}
 		return "start";
 	}
-	
+
+	/**TODO - need to improve, temporary method to test saving data
+	 * @return
+	 */
 	@GetMapping("/csv")
 	public String saveToCSV() {
 		CSVFileSaver fileToSaveData = new CSVFileSaver();
@@ -116,5 +125,21 @@ public class MatchController {
 		ExcelFileWriter excelToSave = new ExcelFileWriter();
 		excelToSave.saveMatch(game);
 		return "start";
+	}
+
+	/**TODO - need to improve, temporary metod to test saving list of data
+	 * @param request
+	 * @return
+	 */
+	@GetMapping("/csv2")
+	public String saveToFile(HttpServletRequest request) {
+		List<Match> listOfGames = new ArrayList<>();
+		for (int i = 5; i < 10; i++) {
+			listOfGames.add(matchService.findMatchByID(i));
+		}
+		request.setAttribute("game", listOfGames);
+		ExcelFileWriter excelToSave = new ExcelFileWriter();
+		excelToSave.saveListOfMatches(listOfGames);
+		return "showGames";
 	}
 }
