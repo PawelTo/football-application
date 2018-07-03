@@ -140,6 +140,10 @@ public class MatchController {
 		request.setAttribute("game", listOfGames);
 		ExcelFileWriter excelToSave = new ExcelFileWriter();
 		excelToSave.saveListOfMatches(listOfGames);
+		CSVFileSaver cSVToSave = new CSVFileSaver();
+		cSVToSave.saveListOfMatches(listOfGames);
+		TXTFileSaver tXTToSave = new TXTFileSaver();
+		tXTToSave.saveListOfMatches(listOfGames);
 		return "showGames";
 	}
 }
