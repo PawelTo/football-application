@@ -134,7 +134,7 @@ public class MatchController {
 	@GetMapping("/csv2")
 	public String saveToFile(HttpServletRequest request) {
 		List<Match> listOfGames = new ArrayList<>();
-		for (int i = 5; i < 10; i++) {
+		for (int i = 5; i < 11; i++) {
 			listOfGames.add(matchService.findMatchByID(i));
 		}
 		request.setAttribute("game", listOfGames);
@@ -144,6 +144,15 @@ public class MatchController {
 		cSVToSave.saveListOfMatches(listOfGames);
 		TXTFileSaver tXTToSave = new TXTFileSaver();
 		tXTToSave.saveListOfMatches(listOfGames);
-		return "showGames";
+		return "showGamesPick";
+	}
+	
+	@PostMapping("/ckBox")
+	public String testingCheckBox(HttpServletRequest request) {
+		System.out.println("ckBox");
+		String[] napisy = request.getParameterValues("nazwa");
+		for(String nap : napisy)
+			System.out.println(nap);
+		return"start"; 
 	}
 }

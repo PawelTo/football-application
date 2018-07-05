@@ -1,0 +1,66 @@
+<!-- Webside to test adding JS, CSS and bootstrap element - it's only a copy of "showGames.html" file -->
+<!DOCTYPE html>
+<html lang="pl-PL" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="../static/css/testing.css"
+	th:href="@{/css/testing.css}">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+<title>Test file to show data from DB</title>
+</head>
+<body>
+	<h1>The Biggest score:</h1>
+	<h5>Text with scores</h5>
+	<button type="button" onclick="getDataFromHTML(5,6,7)"
+		th:onclick="'javascript:getDataFromHTML(\''+ ${game} + '\');'">Check
+		the highest score</button>
+	<p id="description">
+	<p>
+	<div id="tabela">
+		<h1>Results in table</h1>
+		<form action="#" th:action="@{/ckBox}" method="post">
+			<table class="table table-dark table-hover">
+				<thead>
+					<tr>
+						<th>Home Team</th>
+						<th>Date Of Game</th>
+						<th>Away Team</th>
+						<th>Home Team Goals</th>
+						<th>Away Team Goals</th>
+						<th>Attendance</th>
+						<th>Competition Name</th>
+						<th>To Save</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="m : ${game}">
+						<td th:text="${m.homeTeam.ClubName}">Random Text</td>
+						<td th:text="${m.dateOfGame}">Random Text2</td>
+						<!--
+					Try to change date format
+					 <td th:text="${#temporals.format(m.dateOfGame,'dd-MM-yyyy')}">Random Text2</td>
+					 -->
+						<td th:text="${m.awayTeam.ClubName}"></td>
+						<td th:text="${m.homeTeamScore}"></td>
+						<td th:text="${m.awayTeamScore}"></td>
+						<td th:text="${m.attendance}"></td>
+						<td th:text="${m.competition.CompetitionName}"></td>
+						<td><input type="checkbox" name="nazwa" th:value="${m.id}"></td>
+				</tbody>
+			</table>
+			<div>
+				<button type="submit" class="btn btn-default">Save To File</button>
+			</div>
+		</form>
+	</div>
+
+	<!-- Only scripts -->
+	<script th:src="@{/js/countGoals.js}" src="../static/js/countGoals.js"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+</body>
+</html>
