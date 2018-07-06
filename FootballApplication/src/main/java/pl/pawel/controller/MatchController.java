@@ -2,6 +2,7 @@ package pl.pawel.controller;
 
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -95,8 +96,9 @@ public class MatchController {
 		return "editGame";
 	}
 
-	/** TODO - need to improve
-	 * Method to read data from file
+	/**
+	 * TODO - need to improve Method to read data from file
+	 * 
 	 * @return
 	 */
 	@GetMapping("/file")
@@ -112,7 +114,9 @@ public class MatchController {
 		return "start";
 	}
 
-	/**TODO - need to improve, temporary method to test saving data
+	/**
+	 * TODO - need to improve, temporary method to test saving data
+	 * 
 	 * @return
 	 */
 	@GetMapping("/csv")
@@ -127,19 +131,37 @@ public class MatchController {
 		return "start";
 	}
 
-	/**TODO - need to improve, temporary metod to test saving list of data
+	/**
+	 * TODO - need to improve, temporary metod to test saving list of data
+	 * 
 	 * @param request
 	 * @return
 	 */
 	@GetMapping("/csv2")
 	public String saveToFile(HttpServletRequest request) {
 		List<Match> listOfGames = new ArrayList<>();
-		for (int i = 5; i < 10; i++) {
+		for (int i = 1; i < 11; i++) {
 			listOfGames.add(matchService.findMatchByID(i));
 		}
 		request.setAttribute("game", listOfGames);
 		ExcelFileWriter excelToSave = new ExcelFileWriter();
 		excelToSave.saveListOfMatches(listOfGames);
-		return "showGames";
+		CSVFileSaver cSVToSave = new CSVFileSaver();
+		cSVToSave.saveListOfMatches(listOfGames);
+		TXTFileSaver tXTToSave = new TXTFileSaver();
+		tXTToSave.saveListOfMatches(listOfGames);
+		return "showGamesPick";
+	}
+
+	@PostMapping("/ckBox")
+	public String testingCheckBox(HttpServletRequest request) {
+		String[] gamesFromRequest = request.getParameterValues("id");
+		List<Match> gamesToSave = new LinkedList<>();
+		for (String game : gamesFromRequest) {
+			gamesToSave.add(matchService.findMatchByID(Long.parseLong(game)));
+		}
+		ExcelFileWriter excelFile = new ExcelFileWriter();
+		excelFile.saveListOfMatches(gamesToSave);
+		return "start";
 	}
 }
