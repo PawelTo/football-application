@@ -1,4 +1,4 @@
-package pl.pawel.service;
+package pl.pawel.service.dataFileSaver;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -6,20 +6,14 @@ import java.util.List;
 
 import pl.pawel.model.Match;
 
-/**
- * Class that enable saving data to CSV file
- * 
- * @author Pawel
- *
- */
-public class CSVFileSaver implements IFileSaver {
+public class TXTFileSaver implements IFileSaver {
 
 	private String separator = "	";
 	private String endOfLineMark = "\n";
 	private String path = "C:\\Users\\Pawel\\Desktop\\";
-	private String fileName = "CreatedFile.csv";
+	private String fileName = "CreatedFile.txt";
 	private FileWriter fileWriter;
-	private StringBuilder sb;
+	StringBuilder sb;
 
 	@Override
 	public void saveMatch(Match game) {
@@ -40,13 +34,13 @@ public class CSVFileSaver implements IFileSaver {
 	private String matchToString(Match game) {
 		StringBuilder tempSb = new StringBuilder();
 		tempSb.append(game.getHomeTeam().getClubName()).append(separator).append(game.getAwayTeam().getClubName())
-				.append(separator).append(game.getHomeTeamScore()).append(":").append(game.getAwayTeamScore())
-				.append(endOfLineMark);
+				.append(separator).append(game.getHomeTeamScore()).append(":").append(game.getAwayTeamScore()).append(endOfLineMark);
 		return tempSb.toString();
 	}
 
 	@Override
 	public void saveListOfMatches(List<Match> listOfGames) {
+		// TODO Auto-generated method stub
 		sb = new StringBuilder();
 		sb.append("home Team").append(separator).append("Away Team").append(separator).append("Result")
 				.append(endOfLineMark);
@@ -62,4 +56,5 @@ public class CSVFileSaver implements IFileSaver {
 			e.printStackTrace();
 		}
 	}
+
 }

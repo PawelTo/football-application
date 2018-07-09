@@ -1,4 +1,4 @@
-package pl.pawel.service;
+package pl.pawel.service.dataFileSaver;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -19,7 +19,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import pl.pawel.model.Match;
 
-public class ExcelFileWriter implements IFileSaver {
+public class ExcelFileSaver implements IFileSaver {
 
 	private String path = "C:\\Users\\Pawel\\Desktop\\";
 	private String fileName = "CreatedFile.xlsx";
