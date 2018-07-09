@@ -49,8 +49,21 @@
 						<td><input type="checkbox" name="id" th:value="${m.id}"></td>
 				</tbody>
 			</table>
-			<div>
-				<button type="submit" class="btn btn-default">Save To File</button>
+			<!-- Place to select file type -->
+			<div class="container">
+				<div class="row">
+					<div class="col-8">
+						<label for="fileKindSelect">Select type of file to save:</label>
+						<select class="form-control" name="fileKind">
+							<option value="csv">csv</option>
+							<option value="txt">txt</option>
+							<option value="xlsx">xlsx</option>
+						</select>
+					</div>
+					<div class="col-4">
+						<button type="submit" class="btn btn-success">Save To File</button>
+					</div>
+				</div>
 			</div>
 		</form>
 	</div>

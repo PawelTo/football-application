@@ -1,10 +1,8 @@
 package pl.pawel.controller;
 
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,16 +15,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import pl.pawel.model.Match;
-import pl.pawel.service.CSVFileSaver;
-import pl.pawel.service.ExcelFileWriter;
-import pl.pawel.service.IFileSaver;
 import pl.pawel.service.MatchFromData;
 import pl.pawel.service.MatchService;
 import pl.pawel.service.ReadFile;
-import pl.pawel.service.TXTFileSaver;
+import pl.pawel.service.dataFileSaver.CSVFileSaver;
+import pl.pawel.service.dataFileSaver.ExcelFileFactory;
+import pl.pawel.service.dataFileSaver.ExcelFileSaver;
+import pl.pawel.service.dataFileSaver.FileSaver;
+import pl.pawel.service.dataFileSaver.IFileSaver;
+import pl.pawel.service.dataFileSaver.IFileSaverFactory;
+import pl.pawel.service.dataFileSaver.TXTFileSaver;
 
 // If you send data to HTML views via HttpServletRequest.setAttribute the name
 // have to be the same as the name of the object in HTML file, if you use
@@ -48,6 +48,9 @@ public class MatchController {
 
 	@Autowired
 	private MatchFromData mfData;
+	
+	@Autowired
+	private FileSaver file;
 
 	@GetMapping("/all")
 	public String getAllMatches(HttpServletRequest request) {
@@ -126,7 +129,7 @@ public class MatchController {
 		fileToSaveData.saveMatch(game);
 		TXTFileSaver fileToSave = new TXTFileSaver();
 		fileToSave.saveMatch(game);
-		ExcelFileWriter excelToSave = new ExcelFileWriter();
+		ExcelFileSaver excelToSave = new ExcelFileSaver();
 		excelToSave.saveMatch(game);
 		return "start";
 	}
@@ -144,7 +147,7 @@ public class MatchController {
 			listOfGames.add(matchService.findMatchByID(i));
 		}
 		request.setAttribute("game", listOfGames);
-		ExcelFileWriter excelToSave = new ExcelFileWriter();
+		ExcelFileSaver excelToSave = new ExcelFileSaver();
 		excelToSave.saveListOfMatches(listOfGames);
 		CSVFileSaver cSVToSave = new CSVFileSaver();
 		cSVToSave.saveListOfMatches(listOfGames);
@@ -156,12 +159,11 @@ public class MatchController {
 	@PostMapping("/ckBox")
 	public String testingCheckBox(HttpServletRequest request) {
 		String[] gamesFromRequest = request.getParameterValues("id");
-		List<Match> gamesToSave = new LinkedList<>();
-		for (String game : gamesFromRequest) {
-			gamesToSave.add(matchService.findMatchByID(Long.parseLong(game)));
-		}
-		ExcelFileWriter excelFile = new ExcelFileWriter();
-		excelFile.saveListOfMatches(gamesToSave);
+		String fileKind = request.getParameter("fileKind");
+		
+		file.saveMatchToFile(fileKind, gamesFromRequest);
 		return "start";
 	}
+
+	
 }
