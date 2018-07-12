@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<!-- Temporary file to show data from JSON -->
+<html lang="pl-PL" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Example of Club from Rest Controller</title>
+</head>
+
+<body>
+	<div>
+		<p class="club-name">Name of Club: </p>
+		<p class="club-stadiumName">Stadium Name: </p>
+		<p class="club-stadiumCapacity">Stadium Capacity: </p>
+	</div>
+
+	<!-- Only scripts -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script th:src="@{/js/jsonClub.js}" src="../static/js/jsonClub.js"></script>
+</body>
+</html>
