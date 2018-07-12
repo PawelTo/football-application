@@ -1,6 +1,7 @@
 package pl.pawel.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,7 +16,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import pl.pawel.model.Club;
 import pl.pawel.model.Match;
 import pl.pawel.service.MatchFromData;
 import pl.pawel.service.MatchService;
@@ -156,14 +159,30 @@ public class MatchController {
 		return "showGamesPick";
 	}
 
-	@PostMapping("/ckBox")
-	public String testingCheckBox(HttpServletRequest request) {
+	@PostMapping("/saveGamesToFile")
+	public String saveGamesToFile(HttpServletRequest request) {
 		String[] gamesFromRequest = request.getParameterValues("id");
 		String fileKind = request.getParameter("fileKind");
 		
 		file.saveMatchToFile(fileKind, gamesFromRequest);
 		return "start";
 	}
-
 	
+	/**Temporary method to try ResponseBody
+	 * @return
+	 */
+	@ResponseBody
+	@GetMapping("/testResponse")
+	public Club testOfResponseBody() {
+		return new Club("ClubFromRest", "Stadium From Rest", 1234);
+	}
+	
+	/**Temporary method to try ResponseBody
+	 * this method is only to call /testResponse via jsonClub.js
+	 * @return
+	 */
+	@GetMapping("/rest")
+	public String testOfR() {
+		return "restClub";
+	}
 }
