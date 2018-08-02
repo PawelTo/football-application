@@ -53,23 +53,35 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-8">
-						<label for="fileKindSelect">Select type of file to save:</label>
-						<select class="form-control" name="fileKind">
+						<label for="fileKindSelect">Select type of file to save:</label> <select
+							class="form-control" name="fileKind">
 							<option value="csv">csv</option>
 							<option value="txt">txt</option>
 							<option value="xlsx">xlsx</option>
 						</select>
 					</div>
 					<div class="col-4">
-						<button type="submit" class="btn btn-success">Save To File</button>
+						<button type="submit" class="btn btn-success">Save To
+							File</button>
 					</div>
 				</div>
 			</div>
 		</form>
 	</div>
+	<div>
+		<h5>Text with scores</h5>
+		<button class="btn btn-info" id="infoButton">Second button - INFO</button>
+		<button class="btn btn-info" id="changeButton">Change button - INFO</button>
+		<p id="tooltip">
+		<p>
+	</div>
 
 	<!-- Only scripts -->
-	<script th:src="@{/js/countGoals.js}" src="../static/js/countGoals.js"></script>
+	<script th:src="@{/js/countGoals.js}" src="../static/js/countGoals.js" type="module"></script>
+	<!-- Script to test adding function to element in seperate file
+	type module enable to import function from one file to another-->
+	<script th:src="@{/js/addingFunctionToFile.js}"
+		src="../static/js/addingFunctionToFile.js" type="module"></script>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>

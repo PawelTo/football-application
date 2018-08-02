@@ -37,3 +37,11 @@ function getMax(parametr){
 	}
     return "The biggest score id: " +max[0] + " number of goals: "+max[1];
 }
+
+function randomFunction(methodArg){
+	//random function to test exporting function to other files (modules)
+	methodArg.innerText = "text from other method";
+}
+
+//enable function to other files
+export { randomFunction }
