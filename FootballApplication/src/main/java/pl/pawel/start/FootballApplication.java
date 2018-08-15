@@ -11,8 +11,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EntityScan("pl.pawel")
 @EnableJpaRepositories("pl.pawel")
 public class FootballApplication {
-
+	
 	public static void main(String[] args) {
 		SpringApplication.run(FootballApplication.class, args);
-	}
+	}	
 }

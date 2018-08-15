@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import pl.pawel.model.Club;
 import pl.pawel.model.Match;
+import pl.pawel.service.MatchCompare;
 import pl.pawel.service.MatchFromData;
 import pl.pawel.service.MatchService;
 import pl.pawel.service.ReadFile;
@@ -182,7 +183,17 @@ public class MatchController {
 	 * @return
 	 */
 	@GetMapping("/rest")
-	public String testOfR() {
+	public String testOfRest() {
 		return "restClub";
+	}
+	
+	@GetMapping("/lambda")
+	public String countAttendance() {
+		Match match1 = matchService.findMatchByID(4);
+		Match match2 = matchService.findMatchByID(12);
+		MatchCompare mCompare = new MatchCompare();
+		mCompare.compareMatchesAttendance(match1, match2);
+		mCompare.compareGamesLambda(match1, match2);
+		return "start";
 	}
 }
