@@ -11,7 +11,6 @@ public class MainController {
 		return "start";
 	}
 	
-	
 	/**Method to return login HTML to test Spring Security - authorization
 	 * @return
 	 */
