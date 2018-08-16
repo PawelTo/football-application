@@ -1,5 +1,7 @@
 package pl.pawel.service;
 
+import java.util.function.Predicate;
+
 import pl.pawel.model.Match;
 
 public class MatchCompare {
@@ -27,8 +29,22 @@ public class MatchCompare {
 			return goalsDifference;
 		};
 		
+		//Using functional interface to check if homeTeam win game
+		Predicate<Match> checkIfHomeTeamWin = (a) ->{
+			int homeTeamScore = a.getHomeTeamScore();
+			int awayTeamScore = a.getAwayTeamScore();
+			boolean homeTeamWin = false;
+			System.out.println(a.getHomeTeam().getClubName()+" - "+a.getAwayTeam().getClubName()+" "+ homeTeamScore+ " : "+awayTeamScore);
+			homeTeamWin = (homeTeamScore>awayTeamScore) ? true : false;
+			
+			return homeTeamWin;
+		};
+		
 		System.out.println("I'm using lambda expression");
 		attendanceComparator.compare(m1, m2);
 		goalsComparator.compare(m1, m2);
+		checkIfHomeTeamWin.test(m1);
 	}
+	
+	
 }
