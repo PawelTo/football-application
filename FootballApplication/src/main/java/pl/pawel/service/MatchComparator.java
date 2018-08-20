@@ -2,7 +2,7 @@ package pl.pawel.service;
 
 import pl.pawel.model.Match;
 
-/** Interface to comare matches
+/** Interface to compare matches
  * @author Pawel
  *
  */
