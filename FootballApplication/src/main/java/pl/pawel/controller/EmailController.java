@@ -19,12 +19,8 @@ public class EmailController {
 	
 	@RequestMapping("/sendEmail")
 	public String sendEmail(@ModelAttribute Email email, HttpServletRequest request) {
-		String reciverAddress = request.getParameter("address");
-		String emailSubject = request.getParameter("subject");
-		String emailMessage = request.getParameter("message");
-		System.out.println("rec: "+reciverAddress+ " sub: "+emailSubject+ " mes: "+emailMessage);
-		em.sendEmail("spring.tutorial@o2.pl", "Email subject", "Dummy mail");
 		em.sendEmail(email);
+		em.sendEmailWithAttachment(email,"C:\\Users\\Pawel\\Desktop\\Email.xls");
 		return "start";
 	}
 	
