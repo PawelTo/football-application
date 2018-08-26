@@ -15,15 +15,32 @@ public class EmailSenderImplementation implements EmailSender{
 	private JavaMailSender javaMailSender;
 	
 	@Override
-	public void sendEmail(String to, String subject, String text) {
+	public void sendEmail(String to, String subject, String message) {
 		MimeMessage mail = javaMailSender.createMimeMessage();
 		try {
 			MimeMessageHelper helper = new MimeMessageHelper(mail, true);
 			helper.setTo(to);
 			helper.setSubject(subject);
-			helper.setText(text);
+			helper.setText(message);
 			//some emails like gmail doesn't need to setFrom explicitly
-			helper.setFrom("xxx@o2.pl");
+			helper.setFrom("spring.tutorial@o2.pl");
+		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		javaMailSender.send(mail);
+	}
+
+	@Override
+	public void sendEmail(Email email) {
+		MimeMessage mail = javaMailSender.createMimeMessage();
+		try {
+			MimeMessageHelper helper = new MimeMessageHelper(mail, true);
+			helper.setTo(email.getAddress());
+			helper.setSubject(email.getSubject());
+			helper.setText(email.getMessage());
+			//some emails like gmail doesn't need to setFrom explicitly
+			helper.setFrom("spring.tutorial@o2.pl");
 		} catch (MessagingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
