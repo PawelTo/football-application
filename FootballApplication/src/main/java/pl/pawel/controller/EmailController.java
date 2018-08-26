@@ -19,7 +19,6 @@ public class EmailController {
 	
 	@RequestMapping("/sendEmail")
 	public String sendEmail(@ModelAttribute Email email, HttpServletRequest request) {
-		//em = new EmailSenderImplementation();
 		String reciverAddress = request.getParameter("address");
 		String emailSubject = request.getParameter("subject");
 		String emailMessage = request.getParameter("message");
