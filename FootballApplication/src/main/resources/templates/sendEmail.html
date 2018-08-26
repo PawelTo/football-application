@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pl-PL" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Send Email to any person you want</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css">
+</head>
+<body>
+	<div>
+		<h2>Here you can type a message and send it to any e-mail address</h2>
+		<form action="#" th:action="@{/sendEmail}" th:object="${email}" method="post">
+			<div class="form-group">
+				<label>Email address: </label><input th:field="*{address}" name="address">
+			</div>
+			<div class="form-group">
+				<label>Email subject: </label><input th:field="*{subject}" name="subject">
+			</div>
+			<div class="form-group">
+				<label>Email message: </label><input th:field="*{message}" name="message">
+			</div>
+			<input type="submit" value="input send" />
+			<button type="submit" class="btn btn-success">Send button</button>
+			<button class="btn btn-primary" id="insertButton">not submit
+				button</button>
+		</form>
+	</div>
+</body>
+</html>
