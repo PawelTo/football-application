@@ -3,6 +3,7 @@ package pl.pawel.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import pl.pawel.model.Club;
 import pl.pawel.repository.ClubRepository;
@@ -31,5 +32,23 @@ public class ClubController {
 		System.out.println(cr.findOne((long) 1));
 		System.out.println("znalazłem: "+clubService.findOne(1));
 		return "start";
+	}	
+
+	/**Temporary method to try ResponseBody
+	 * @return
+	 */
+	@ResponseBody
+	@GetMapping("/testResponse")
+	public Club testOfResponseBody() {
+		return new Club("ClubFromRest", "Stadium From Rest", 1234);
+	}
+	
+	/**Temporary method to try ResponseBody
+	 * this method is only to call /testResponse via jsonClub.js
+	 * @return
+	 */
+	@GetMapping("/rest")
+	public String testOfRest() {
+		return "restClub";
 	}
 }

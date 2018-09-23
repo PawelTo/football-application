@@ -1,25 +1,27 @@
 <!DOCTYPE html>
-<!-- Temporary file to show data from JSON -->
 <html lang="pl-PL" xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Example of Club from Rest Controller</title>
+<meta charset="UTF-8">
+<title>Match Details from Rest Controller</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css">
 </head>
-
 <body>
 	<div>
-		<p class="club-name">Name of Club:</p>
-		<p class="club-stadiumName">Stadium Name:</p>
-		<p class="club-stadiumCapacity">Stadium Capacity:</p>
+		<p class="home-team">Home Team: </p>
+		<p class="away-team">Home Team: </p>
+		<p class="home-team-score">Attendance: </p>
+		<!-- <p class="attendance">Result:</p> -->
 	</div>
 	
+	<button class="btn btn-primary" id="nextButton">Go to next game</button>
+			
 	<!-- Only scripts -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-	<script th:src="@{/js/jsonClub.js}" src="../static/js/jsonClub.js"></script>
+	<script th:src="@{/js/jsonMatch.js}" src="../static/js/jsonMatch.js"></script>
 </body>
 </html>
