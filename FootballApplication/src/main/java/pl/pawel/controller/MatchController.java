@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.codehaus.groovy.transform.sc.ListOfExpressionsExpression;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import pl.pawel.model.Club;
+import pl.pawel.model.Competition;
 import pl.pawel.model.Match;
 import pl.pawel.service.MatchCompare;
 import pl.pawel.service.MatchFromData;
@@ -52,7 +54,7 @@ public class MatchController {
 
 	@Autowired
 	private MatchFromData mfData;
-	
+
 	@Autowired
 	private FileSaver file;
 
@@ -164,29 +166,11 @@ public class MatchController {
 	public String saveGamesToFile(HttpServletRequest request) {
 		String[] gamesFromRequest = request.getParameterValues("id");
 		String fileKind = request.getParameter("fileKind");
-		
+
 		file.saveMatchToFile(fileKind, gamesFromRequest);
 		return "start";
 	}
-	
-	/**Temporary method to try ResponseBody
-	 * @return
-	 */
-	@ResponseBody
-	@GetMapping("/testResponse")
-	public Club testOfResponseBody() {
-		return new Club("ClubFromRest", "Stadium From Rest", 1234);
-	}
-	
-	/**Temporary method to try ResponseBody
-	 * this method is only to call /testResponse via jsonClub.js
-	 * @return
-	 */
-	@GetMapping("/rest")
-	public String testOfRest() {
-		return "restClub";
-	}
-	
+
 	@GetMapping("/lambda")
 	public String countAttendance() {
 		Match match1 = matchService.findMatchByID(4);
@@ -195,5 +179,34 @@ public class MatchController {
 		mCompare.compareMatchesAttendance(match1, match2);
 		mCompare.compareGamesLambda(match1, match2);
 		return "start";
+	}
+
+	/**
+	 * Temporary method to try Single Page Application
+	 * 
+	 * @return HTML view with json
+	 */
+	@GetMapping("/restMatch")
+	public String testOfSinglePageApplication() {
+		return "showGamesRest";
+	}
+
+	/** Temporary method to try Single Page Application
+	 * @param id
+	 * @return default Game
+	 */
+	@ResponseBody
+	@GetMapping("/testSPAMatch")
+	public Match testOfResponseBody(@RequestParam(defaultValue = "1", required = true, name = "id") int id) {
+		// Match matchToReturn = matchService.findMatchByID(1);
+		
+		//Temporary listOfMatches to try sending JSON depending on parameter value
+		ArrayList<Match> listOfMatches = new ArrayList<>();
+		for (int i = 0; i < id; i++) {
+			listOfMatches.add(new Match(null, new Club("KLUB1 "+i, "stadion1 "+i, 110+i), new Club("KLUB2"+i, "stadion2"+i, 111+i), 5*i,
+					2, new Competition("Roz"+i, 1), 12*i));
+		}
+		Match matchToReturn = listOfMatches.get(id-1);
+		return matchToReturn;
 	}
 }
