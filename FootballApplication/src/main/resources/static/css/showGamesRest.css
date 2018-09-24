@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+body {
+	/* Random background image */
+	background-image: url("https://www.desktopbackground.org/p/2015/05/05/943306_image-of-football-pitch-backgrounds_1680x1050_h.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+div{
+	font-weight: bold;
+}
