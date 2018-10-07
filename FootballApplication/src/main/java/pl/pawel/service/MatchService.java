@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import pl.pawel.model.Competition;
 import pl.pawel.model.Match;
 import pl.pawel.repository.MatchRepository;
 
