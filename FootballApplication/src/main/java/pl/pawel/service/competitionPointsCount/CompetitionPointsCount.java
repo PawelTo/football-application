@@ -22,82 +22,85 @@ public class CompetitionPointsCount {
 	@Autowired
 	private MatchRepository matchRepository;
 
-	public int getMatchesFromCompetition() {
-		// int numberOfCompetition = matchRepository.countByCompetition();
-		Competition competition = new Competition();
-		competition.setId((long) 2);
-		long numberOfMatches = matchRepository.countByCompetition(competition);
+	public List<LeagueTableRow> getTableOfCompetition(Competition competition){
 		matches = matchRepository.findByCompetition(competition);
-		return (int) numberOfMatches;
+		table = createTable(matches);
+		return table;
 	}
-
-	public LeagueTableRow getTableOfCompetition(Competition competition) {
-		return new LeagueTableRow();
-	}
-
-	public LeagueTableRow getTableOfCompetition(long id) {
-		competition = createCompetitionFromLong(id);
-		return getTableOfCompetition(competition);
-	}
-
-	private List<Match> getMatchesFromCompetition(Competition competition) {
-		matches = matchRepository.findByCompetition(competition);
-		return matches;
-	}
-
-	public List<LeagueTableRow> getTableByCompetitionId(long id) {
+	public List<LeagueTableRow> getTableOfCompetitoin(long id) {
 		matches = matchRepository.findByCompetition(createCompetitionFromLong(id));
 		table = createTable(matches);
 		return table;
 	}
 
-	public List<LeagueTableRow> createTable(List<Match> matches) {
+	private List<LeagueTableRow> createTable(List<Match> matches) {
 		matches = getMatchesFromCompetition(competition);
-		table = new ArrayList<>();
+		table = createNewTable();
 		for (Match match : matches) {
 			int homeTeamPosition = -1;
-			int awayTeamPosition = -1;
-			// check if teams form match already exist in table
+			int awayTeamPosition = -1;		
+			String homeTeamName = match.getHomeTeam().getClubName();
+			String awayTeamName = match.getAwayTeam().getClubName();
+			int awayTeamScore = match.getAwayTeamScore();
+			int homeTeamScore = match.getHomeTeamScore();
+			
+			// check if teams form match already exist in table	
 			int i = 0;
 			if (!table.isEmpty()) {
 				while (i <= table.size() && (homeTeamPosition < 0 || awayTeamPosition < 0)) {
-					if (table.get(i).getTeamNeame().equals(match.getHomeTeam().getClubName()))
+					if (table.get(i).getTeamNeame().equals(homeTeamName))
 						homeTeamPosition = i;
-					if (table.get(i).getTeamNeame().equals(match.getAwayTeam().getClubName()))
+					if (table.get(i).getTeamNeame().equals(awayTeamName))
 						awayTeamPosition = i;
 					i++;
 				}
 			}
 			if (homeTeamPosition < 0) {
-				LeagueTableRow homeTeam = new LeagueTableRow();
-				homeTeam.setTeamNeame(match.getHomeTeam().getClubName());
-				table.add(homeTeam);
-				homeTeamPosition = table.size() - 1;
+				homeTeamPosition = addNewTeamToTable(homeTeamName);
 			}
 			if (awayTeamPosition < 0) {
-				LeagueTableRow awayTeam = new LeagueTableRow();
-				awayTeam.setTeamNeame(match.getAwayTeam().getClubName());
-				table.add(awayTeam);
-				awayTeamPosition = table.size() - 1;
+				awayTeamPosition = addNewTeamToTable(awayTeamName);
 			}
-			LeagueTableRow homeTeamRow = table.get(homeTeamPosition);
-			homeTeamRow.setGoalsFor(homeTeamRow.getGoalsFor() + match.getHomeTeamScore());
-			homeTeamRow.setGoalsAgainst(homeTeamRow.getGoalsAgainst() + match.getAwayTeamScore());
-
-			LeagueTableRow awayTeamRow = table.get(awayTeamPosition);
-			awayTeamRow.setGoalsFor(awayTeamRow.getGoalsFor() + match.getAwayTeamScore());
-			awayTeamRow.setGoalsAgainst(awayTeamRow.getGoalsAgainst() + match.getHomeTeamScore());
-
-			if (match.getHomeTeamScore() > match.getAwayTeamScore())
-				homeTeamRow.setPoints(homeTeamRow.getPoints() + 3);
-			else if (match.getHomeTeamScore() == match.getAwayTeamScore()) {
-				homeTeamRow.setPoints(homeTeamRow.getPoints() + 1);
-				awayTeamRow.setPoints(awayTeamRow.getPoints() + 1);
-			} else {
-				awayTeamRow.setPoints(awayTeamRow.getPoints() + 3);
-			}
+			updateTable(homeTeamPosition, awayTeamPosition, awayTeamScore, homeTeamScore);
 		}
 		return table;
+	}
+
+	private void updateTable(int homeTeamPosition, int awayTeamPosition, int awayTeamScore, int homeTeamScore) {
+		LeagueTableRow homeTeamRow = table.get(homeTeamPosition);
+		homeTeamRow.setGoalsFor(homeTeamRow.getGoalsFor() + homeTeamScore);			
+		homeTeamRow.setGoalsAgainst(homeTeamRow.getGoalsAgainst() + awayTeamScore);
+
+		LeagueTableRow awayTeamRow = table.get(awayTeamPosition);
+		awayTeamRow.setGoalsFor(awayTeamRow.getGoalsFor() + awayTeamScore);
+		awayTeamRow.setGoalsAgainst(awayTeamRow.getGoalsAgainst() + homeTeamScore);
+
+		if (homeTeamScore > awayTeamScore)
+			homeTeamRow.setPoints(homeTeamRow.getPoints() + 3);
+		else if (homeTeamScore == awayTeamScore) {
+			homeTeamRow.setPoints(homeTeamRow.getPoints() + 1);
+			awayTeamRow.setPoints(awayTeamRow.getPoints() + 1);
+		} else {
+			awayTeamRow.setPoints(awayTeamRow.getPoints() + 3);
+		}
+	}
+
+	private int addNewTeamToTable(String teamName) {
+		int teamPosition;
+		LeagueTableRow teamRow = new LeagueTableRow();
+		teamRow.setTeamNeame(teamName);
+		table.add(teamRow);
+		teamPosition = table.size() - 1;
+		return teamPosition;
+	}
+
+	private List<LeagueTableRow> createNewTable() {
+		return new ArrayList<>();
+	}
+	
+	private List<Match> getMatchesFromCompetition(Competition competition) {
+		matches = matchRepository.findByCompetition(competition);
+		return matches;
 	}
 
 	private Competition createCompetitionFromLong(long id) {

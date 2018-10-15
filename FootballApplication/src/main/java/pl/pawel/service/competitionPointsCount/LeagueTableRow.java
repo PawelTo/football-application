@@ -15,8 +15,6 @@ public class LeagueTableRow {
 				+ ", goalsAgainst=" + goalsAgainst + "]";
 	}
 
-
-
 	public String getTeamNeame() {
 		return TeamNeame;
 	}
