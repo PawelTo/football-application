@@ -20,7 +20,7 @@ public class CompetitionTableController {
 	
 	@GetMapping("/table")
 	@ResponseBody
-	public List<LeagueTableRow> getTable(@RequestParam(defaultValue = "6", required = true, name = "id")int id){
+	public List<LeagueTableRow> getTable(@RequestParam(defaultValue = "1", required = true, name = "id")int id){
 		return competitionPointsCounter.getTableOfCompetitoin(id);
 	}
 }
