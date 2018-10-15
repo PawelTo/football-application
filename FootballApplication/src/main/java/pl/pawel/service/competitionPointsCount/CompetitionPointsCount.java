@@ -47,7 +47,7 @@ public class CompetitionPointsCount {
 			// check if teams form match already exist in table	
 			int i = 0;
 			if (!table.isEmpty()) {
-				while (i <= table.size() && (homeTeamPosition < 0 || awayTeamPosition < 0)) {
+				while (i < table.size() && (homeTeamPosition < 0 || awayTeamPosition < 0)) {
 					if (table.get(i).getTeamNeame().equals(homeTeamName))
 						homeTeamPosition = i;
 					if (table.get(i).getTeamNeame().equals(awayTeamName))
