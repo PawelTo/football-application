@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pl-PL" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="../static/css/testing.css"
+	th:href="@{/css/testing.css}">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+<title>Select Competition Table</title>
+</head>
+<body>
+	<!-- Drop down menu for selecting league -->
+	<div class="btn-group">
+		<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			Select League</button>
+		<div class="dropdown-menu">
+			<a class="dropdown-item" th:each="c: ${competitionList}" th:text="${c.CompetitionName}"></a>
+		</div>
+	</div>
+	<!-- League table -->
+	<div id="tabela">
+		<h1>Choose your league</h1>
+		<table class="table table-dark table-hover" id="leagueTable">
+				<thead>
+					<tr>
+						<th>Team Name</th>
+						<th>Points</th>
+						<th>Goals For</th>
+						<th>Goals Away</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="t : ${table}">
+						<td th:text="${t.teamNeame}"></td>
+						<td th:text="${t.points}"></td>
+						<td th:text="${t.goalsFor}"></td>
+						<td th:text="${t.goalsAgainst}"></td>
+				</tbody>
+			</table>
+	</div>
+
+	<!-- Only scripts -->
+	<!-- Script to test adding function to element in seperate file
+	type module enable to import function from one file to another-->
+	<script th:src="@{/js/addingFunctionToCompetitionCounter.js}"
+		src="../static/js/addingFunctionToCompetitionCounter.js" type="module"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+</body>
+</html>
