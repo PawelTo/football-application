@@ -2,7 +2,7 @@ package pl.pawel.service.competitionPointsCount;
 
 public class LeagueTableRow {
 
-	private String TeamNeame;
+	private String teamNeame;
 	private int points;
 	private int goalsFor;
 	private int goalsAgainst;
@@ -11,16 +11,16 @@ public class LeagueTableRow {
 
 	@Override
 	public String toString() {
-		return "LeagueTableRow [TeamNeame=" + TeamNeame + ", points=" + points + ", goalsFor=" + goalsFor
+		return "LeagueTableRow [TeamNeame=" + teamNeame + ", points=" + points + ", goalsFor=" + goalsFor
 				+ ", goalsAgainst=" + goalsAgainst + "]";
 	}
 
 	public String getTeamNeame() {
-		return TeamNeame;
+		return teamNeame;
 	}
 
 	public void setTeamNeame(String teamNeame) {
-		TeamNeame = teamNeame;
+		this.teamNeame = teamNeame;
 	}
 
 	public int getPoints() {

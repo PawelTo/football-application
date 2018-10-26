@@ -22,6 +22,10 @@ public class CompetitionService {
 		competitionRepository.save(competition);
 	}
 	
+	public Iterable<Competition> findAll(){
+		return competitionRepository.findAll();
+	}
+	
 	//metod to test custom Query
 	public List<Competition> nameEndsWith(String lastChars){
 		List<Competition> listOfCompetitions = competitionRepository.ownFindByLastChars(lastChars);
