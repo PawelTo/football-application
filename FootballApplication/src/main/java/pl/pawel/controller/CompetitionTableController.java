@@ -28,6 +28,7 @@ public class CompetitionTableController {
 	public String selectTableCompetition(Model model) {
 		List<Competition> listOfCompetition = (List<Competition>) competitionService.findAll();
 		model.addAttribute("competitionList", listOfCompetition);
+		//default value of League table to display data
 		model.addAttribute("table", competitionPointsCounter.getTableOfCompetitoin(1));
 		return "tableSelect";
 	}
