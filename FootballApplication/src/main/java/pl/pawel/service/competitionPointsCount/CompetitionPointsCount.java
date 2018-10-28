@@ -1,6 +1,7 @@
 package pl.pawel.service.competitionPointsCount;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +29,8 @@ public class CompetitionPointsCount {
 		return table;
 	}
 	public List<LeagueTableRow> getTableOfCompetitoin(long id) {
-		matches = matchRepository.findByCompetition(createCompetitionFromLong(id));
-		table = createTable(matches);
-		return table;
+		competition=createCompetitionFromLong(id);
+		return getTableOfCompetition(competition);
 	}
 
 	private List<LeagueTableRow> createTable(List<Match> matches) {
@@ -63,6 +63,8 @@ public class CompetitionPointsCount {
 			}
 			updateTable(homeTeamPosition, awayTeamPosition, awayTeamScore, homeTeamScore);
 		}
+		//table ordered by points
+		table.sort(Comparator.comparingInt(LeagueTableRow::getPoints).reversed());
 		return table;
 	}
 

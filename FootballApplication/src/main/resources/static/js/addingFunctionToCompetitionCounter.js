@@ -5,7 +5,7 @@
 const listDropdownItems = document.querySelectorAll('.dropdown-item');
 let myTable = document.getElementById("leagueTable");
 let numberOfItem = 1;
-
+let leagueName = document.getElementById("leagueName");
 
 function showTable(id){
 	$.ajax({
@@ -42,6 +42,10 @@ function removeTableBody(table){
 	return table;
 }
 
+function setNameOfLeague(text){
+	leagueName.innerText = text;
+}
+
 // adding events to objects
 document.addEventListener("DOMContentLoaded",function(){
 	for(const item of listDropdownItems){
@@ -50,6 +54,12 @@ document.addEventListener("DOMContentLoaded",function(){
 				showTable(id);
 			});
 		})(numberOfItem);
+		
+		(function(text) {
+			item.addEventListener('click',function(){
+				setNameOfLeague(text);
+			});
+		})(item.innerText);
 		numberOfItem++;
 	}
 });
