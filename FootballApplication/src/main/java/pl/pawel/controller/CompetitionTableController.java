@@ -1,5 +1,6 @@
 package pl.pawel.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import pl.pawel.service.CompetitionService;
 import pl.pawel.service.MatchService;
 import pl.pawel.service.competitionPointsCount.CompetitionPointsCount;
 import pl.pawel.service.competitionPointsCount.LeagueTableRow;
+import pl.pawel.service.email.Email;
 
 @Controller
 public class CompetitionTableController {
