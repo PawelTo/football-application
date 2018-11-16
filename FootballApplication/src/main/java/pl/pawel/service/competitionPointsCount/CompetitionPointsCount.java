@@ -33,6 +33,11 @@ public class CompetitionPointsCount {
 		return getTableOfCompetition(competition);
 	}
 
+	public List<LeagueTableRow> getTableOfCompetition(List<Match> matches) {
+		this.matches = matches;
+		return createTable(matches);
+	}
+
 	private List<LeagueTableRow> createTable(List<Match> matches) {
 		table = createNewTable();
 		for (Match match : matches) {
@@ -62,8 +67,7 @@ public class CompetitionPointsCount {
 			}
 			updateTable(homeTeamPosition, awayTeamPosition, awayTeamScore, homeTeamScore);
 		}
-		// table ordered by points
-		table.sort(Comparator.comparingInt(LeagueTableRow::getPoints).reversed());
+
 		setProperTeamOrder();
 		return table;
 	}
@@ -112,95 +116,46 @@ public class CompetitionPointsCount {
 	private void setProperTeamOrder() {
 		table.sort(Comparator.comparingInt(LeagueTableRow::getPoints).reversed());
 
-		for (int i = 0; i < table.size() - 1; i++) {
-			int higherRankedTeamPoints = table.get(i).getPoints();
-			int lowerRankedTeamPoints = table.get(i + 1).getPoints();
+		// if all teams in table have the same number of points, there is no reason to
+		// create small table, because all teams will get the same results
+		if (table.get(0).getPoints() != table.get(table.size() - 1).getPoints()) {
+			for (int i = 0; i < table.size() - 1; i++) {
+				int higherRankedTeamPoints = table.get(i).getPoints();
+				int lowerRankedTeamPoints = table.get(i + 1).getPoints();
 
-			if (higherRankedTeamPoints > lowerRankedTeamPoints) {
-				// There is nothing to change
-			} else if (higherRankedTeamPoints < lowerRankedTeamPoints) {
-				System.out.println("Record isn't sort i=" + i);
-			} else if (higherRankedTeamPoints == lowerRankedTeamPoints) {
-				List<String> listOfTeamsWithSamePoints = new LinkedList<>();
-				List<LeagueTableRow> sameRows = new ArrayList<>();
+				if (higherRankedTeamPoints == lowerRankedTeamPoints) {
+					List<String> listOfTeamsWithSamePoints = new LinkedList<>();
+					List<LeagueTableRow> sameRows = new ArrayList<>();
 
-				listOfTeamsWithSamePoints.add(table.get(i).getTeamNeame());
-				sameRows.add(table.get(i));
+					listOfTeamsWithSamePoints.add(table.get(i).getTeamNeame());
+					sameRows.add(table.get(i));
 
-				int j = i + 1;
-				while (table.get(j).getPoints() == lowerRankedTeamPoints) {
-					listOfTeamsWithSamePoints.add(table.get(j).getTeamNeame());
-					sameRows.add(table.get(j));
-					j++;
-				}
-
-				List<Match> matchesTeamsWithSamePoints = new ArrayList<>();
-				for (Match m : matches) {
-					if (listOfTeamsWithSamePoints.contains(m.getAwayTeam().getClubName())
-							&& listOfTeamsWithSamePoints.contains(m.getHomeTeam().getClubName())) {
-						matchesTeamsWithSamePoints.add(m);
+					int j = i + 1;
+					while (j < table.size() && (table.get(j).getPoints() == lowerRankedTeamPoints)) {
+						listOfTeamsWithSamePoints.add(table.get(j).getTeamNeame());
+						sameRows.add(table.get(j));
+						j++;
 					}
-				}
-				
-				// create table for teams with same points
-				List<LeagueTableRow> samePointsTeamTable = new ArrayList<>();
-				for (Match match : matchesTeamsWithSamePoints) {
-					int hTeamPosition = -1;
-					int aTeamPosition = -1;
-					String hTeamNeam = match.getHomeTeam().getClubName();
-					String aTeamNeam = match.getAwayTeam().getClubName();
-					int hTeamScore = match.getHomeTeamScore();
-					int aTeamScore = match.getAwayTeamScore();
 
-					int k = 0;
-					if (!samePointsTeamTable.isEmpty()) {
-						while (k < samePointsTeamTable.size() && (hTeamPosition < 0 || aTeamPosition < 0)) {
-							if (samePointsTeamTable.get(k).getTeamNeame().equals(hTeamNeam))
-								hTeamPosition = k;
-							if (samePointsTeamTable.get(k).getTeamNeame().equals(aTeamNeam))
-								aTeamPosition = k;
-							k++;
+					List<Match> matchesTeamsWithSamePoints = new ArrayList<>();
+					for (Match m : matches) {
+						if (listOfTeamsWithSamePoints.contains(m.getHomeTeam().getClubName())
+								&& listOfTeamsWithSamePoints.contains(m.getAwayTeam().getClubName())) {
+							matchesTeamsWithSamePoints.add(m);
 						}
 					}
-					if (hTeamPosition < 0) {
-						LeagueTableRow thRow = new LeagueTableRow();
-						thRow.setTeamNeame(hTeamNeam);
-						samePointsTeamTable.add(thRow);
-						hTeamPosition = samePointsTeamTable.size() - 1;
-					}
-					if (aTeamPosition < 0) {
-						LeagueTableRow taRow = new LeagueTableRow();
-						taRow.setTeamNeame(aTeamNeam);
-						samePointsTeamTable.add(taRow);
-						aTeamPosition = samePointsTeamTable.size() - 1;
-					}
 
-					// counting points in table
-					LeagueTableRow hTRow = samePointsTeamTable.get(hTeamPosition);
-					hTRow.setGoalsFor(hTRow.getGoalsFor() + hTeamScore);
-					hTRow.setGoalsAgainst(hTRow.getGoalsAgainst() + aTeamScore);
+					// creating "small" table for teams with same points
+					CompetitionPointsCount smallPointsCounter = new CompetitionPointsCount();
+					List<LeagueTableRow> samePointsTeamTable = smallPointsCounter
+							.getTableOfCompetition(matchesTeamsWithSamePoints);
 
-					LeagueTableRow aTRow = samePointsTeamTable.get(aTeamPosition);
-					aTRow.setGoalsFor(aTRow.getGoalsFor() + aTeamScore);
-					aTRow.setGoalsAgainst(aTRow.getGoalsAgainst() + hTeamScore);
-
-					if (hTeamScore > aTeamScore)
-						hTRow.setPoints(hTRow.getPoints() + 3);
-					else if (hTeamScore < aTeamScore)
-						aTRow.setPoints(aTRow.getPoints() + 3);
-					else {
-						hTRow.setPoints(aTRow.getPoints() + 1);
-						aTRow.setPoints(aTRow.getPoints() + 1);
-					}
-				}
-				samePointsTeamTable.sort(Comparator.comparingInt(LeagueTableRow::getPoints).reversed());
-				
-				int l = i;
-				for (LeagueTableRow lr : samePointsTeamTable) {
-					for (LeagueTableRow sr : sameRows) {
-						if (lr.getTeamNeame().equals(sr.getTeamNeame())) {
-							table.set(l, sr);
-							l++;
+					for (LeagueTableRow leagueRow : samePointsTeamTable) {
+						for (LeagueTableRow row : sameRows) {
+							if (leagueRow.getTeamNeame().equals(row.getTeamNeame())) {
+								table.set(i, row);
+								i++;
+							}
 						}
 					}
 				}
