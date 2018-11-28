@@ -116,7 +116,7 @@ public class CompetitionPointsCount {
 	private void setProperTeamOrder() {
 		table.sort(Comparator.comparingInt(LeagueTableRow::getPoints).reversed());
 
-		// if all teams in table have the same number of points, there is no reason to
+		// if all teams in table have the same amount of points, there is no reason to
 		// create small table, because all teams will get the same results
 		if (table.get(0).getPoints() != table.get(table.size() - 1).getPoints()) {
 			for (int i = 0; i < table.size() - 1; i++) {
@@ -125,18 +125,21 @@ public class CompetitionPointsCount {
 
 				if (higherRankedTeamPoints == lowerRankedTeamPoints) {
 					List<String> listOfTeamsWithSamePoints = new LinkedList<>();
-					List<LeagueTableRow> sameRows = new ArrayList<>();
+					List<LeagueTableRow> tableRowsOfTeamsWithSamePoints = new ArrayList<>();
 
 					listOfTeamsWithSamePoints.add(table.get(i).getTeamNeame());
-					sameRows.add(table.get(i));
+					tableRowsOfTeamsWithSamePoints.add(table.get(i));
 
+					// iterating over table to get list of teams with the same amount of points and
+					// that records
 					int j = i + 1;
 					while (j < table.size() && (table.get(j).getPoints() == lowerRankedTeamPoints)) {
 						listOfTeamsWithSamePoints.add(table.get(j).getTeamNeame());
-						sameRows.add(table.get(j));
+						tableRowsOfTeamsWithSamePoints.add(table.get(j));
 						j++;
 					}
 
+					// get matches between teams with same points
 					List<Match> matchesTeamsWithSamePoints = new ArrayList<>();
 					for (Match m : matches) {
 						if (listOfTeamsWithSamePoints.contains(m.getHomeTeam().getClubName())
@@ -146,12 +149,17 @@ public class CompetitionPointsCount {
 					}
 
 					// creating "small" table for teams with same points
-					CompetitionPointsCount smallPointsCounter = new CompetitionPointsCount();
-					List<LeagueTableRow> samePointsTeamTable = smallPointsCounter
-							.getTableOfCompetition(matchesTeamsWithSamePoints);
+					List<LeagueTableRow> samePointsTeamTable;
+					if (!matchesTeamsWithSamePoints.isEmpty()) {
+						samePointsTeamTable = new CompetitionPointsCount()
+								.getTableOfCompetition(matchesTeamsWithSamePoints);
+					}else {
+						samePointsTeamTable = tableRowsOfTeamsWithSamePoints;
+						samePointsTeamTable.sort(new LeagueTableRowComparator());
+					}
 
 					for (LeagueTableRow leagueRow : samePointsTeamTable) {
-						for (LeagueTableRow row : sameRows) {
+						for (LeagueTableRow row : tableRowsOfTeamsWithSamePoints) {
 							if (leagueRow.getTeamNeame().equals(row.getTeamNeame())) {
 								table.set(i, row);
 								i++;
