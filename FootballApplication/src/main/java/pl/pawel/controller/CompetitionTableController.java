@@ -31,13 +31,13 @@ public class CompetitionTableController {
 		List<Competition> listOfCompetition = (List<Competition>) competitionService.findAll();
 		model.addAttribute("competitionList", listOfCompetition);
 		//default value of League table to display data
-		model.addAttribute("table", competitionPointsCounter.getTableOfCompetitoin(1));
+		model.addAttribute("table", competitionPointsCounter.getTableOfCompetition(1));
 		return "tableSelect";
 	}
 	
 	@GetMapping("/table")
 	@ResponseBody
 	public List<LeagueTableRow> getTable(@RequestParam(defaultValue = "1", required = true, name = "id")int id){
-		return competitionPointsCounter.getTableOfCompetitoin(id);
+		return competitionPointsCounter.getTableOfCompetition(id);
 	}
 }

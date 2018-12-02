@@ -24,17 +24,22 @@ public class CompetitionPointsCount {
 
 	public List<LeagueTableRow> getTableOfCompetition(Competition competition) {
 		matches = matchRepository.findByCompetition(competition);
-		table = createTable(matches);
+		if (matches.isEmpty()) {
+			table = null;
+		} else
+			table = createTable(matches);
 		return table;
 	}
 
-	public List<LeagueTableRow> getTableOfCompetitoin(long id) {
+	public List<LeagueTableRow> getTableOfCompetition(long id) {
 		competition = createCompetitionFromLong(id);
 		return getTableOfCompetition(competition);
 	}
 
 	public List<LeagueTableRow> getTableOfCompetition(List<Match> matches) {
 		this.matches = matches;
+		if (matches.isEmpty())
+			return null;
 		return createTable(matches);
 	}
 
@@ -153,7 +158,7 @@ public class CompetitionPointsCount {
 					if (!matchesTeamsWithSamePoints.isEmpty()) {
 						samePointsTeamTable = new CompetitionPointsCount()
 								.getTableOfCompetition(matchesTeamsWithSamePoints);
-					}else {
+					} else {
 						samePointsTeamTable = tableRowsOfTeamsWithSamePoints;
 						samePointsTeamTable.sort(new LeagueTableRowComparator());
 					}

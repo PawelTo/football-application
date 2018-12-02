@@ -11,10 +11,12 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import pl.pawel.model.Club;
 import pl.pawel.model.Competition;
 import pl.pawel.model.Match;
+import pl.pawel.repository.MatchRepository;
 
 public class CompetitionPointsCountTest {
 	
@@ -100,5 +102,21 @@ public class CompetitionPointsCountTest {
 		
 		List<LeagueTableRow> actual = new CompetitionPointsCount().getTableOfCompetition(threeMatchListWithoutGameC2vsC3);
 		assertEquals(expectedTable, actual);
+	}
+	
+	@Test
+	public void getTableOfCompetitionTest_NoMatchesInCompetition() {
+		List<LeagueTableRow> expectedTable = new ArrayList<>();
+		expectedTable = null;
+		List<Match> emptyList = new ArrayList<>();
+		
+		Competition emptyComp = new Competition();
+		
+		MatchRepository matchRepoMock = mock(MatchRepository.class);	
+		when(matchRepoMock.findByCompetition(emptyComp)).thenReturn(emptyList);
+		
+		List<LeagueTableRow> actual = new CompetitionPointsCount().getTableOfCompetition(matchRepoMock.findByCompetition(emptyComp));
+		assertEquals(expectedTable, actual);
+		assertNull("List is empty", actual);
 	}
 }
