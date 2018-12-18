@@ -13,3 +13,4 @@ The main technology used in application are:
 7. Feature to read data from file from supported formats: CSV, TXT, XLS, XLSX, XLSM - Apache POI library
 8. Saving data to file in supported formats: CVS, TXT, XLSX
 9. Sending emails - Spring-boot-starter-mail (it is necessary to configure your email account to send message)
+10. Uploading file from selectecd path to created folder.
