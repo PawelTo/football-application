@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 
 public class WebMatchReader {
 
@@ -20,6 +21,8 @@ public class WebMatchReader {
 	
 	public Document getDocument() throws IOException {
 		Document doc = Jsoup.connect(testHtml1).get();
+		Elements tables = doc.select("table");
+		System.out.println("/T0 REMOVE| doc: "+tables);
 		return doc;
 	}
 }
