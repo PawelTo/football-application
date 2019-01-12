@@ -111,16 +111,20 @@ public class MatchController {
 	 * @return
 	 */
 	@GetMapping("/file")
-	public String readGameFromFile() {
+	public String readGameFromFile(HttpServletRequest request) {
 		// method to test read data from file, later it will file can be selected
+		List<Match> listOfMatches = new ArrayList<>();
+		
 		List<String[]> dataFromFile = new ReadFile().getDataFromFile();
 		for (int i = 1; i < dataFromFile.size(); i++) {
 			mfData.setDataFromFile(dataFromFile.get(i));
 			Match game = mfData.createMatch();
 			logger.info("Row - " + i + " - match: " + game);
 			matchService.save(game);
+			listOfMatches.add(game);
 		}
-		return "start";
+		request.setAttribute("game", listOfMatches);
+		return "showGames";
 	}
 
 	/**
@@ -146,7 +150,7 @@ public class MatchController {
 	 * @param request
 	 * @return
 	 */
-	@GetMapping("/csv2")
+	@GetMapping("/saveToFile")
 	public String saveToFile(HttpServletRequest request) {
 		List<Match> listOfGames = new ArrayList<>();
 		for (int i = 1; i < 11; i++) {
