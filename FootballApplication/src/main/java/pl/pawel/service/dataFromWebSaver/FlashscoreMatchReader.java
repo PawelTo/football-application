@@ -22,7 +22,16 @@ public class FlashscoreMatchReader implements WebMatchReader {
 	/**Group of supported tournament.
 	 * If you want to get data from next competition, it's necessary to add it to array.
 	 */
-	private String supportedCompetition[][] = { { "ANGLIA", "Premier League" }, { "HISZPANIA", "LaLiga" }, { "WŁOCHY", "Serie A" }, {"AUSTRALIA","A-League"}, {"PORTUGALIA","Primeira Liga"} };
+	private String supportedCompetition[][] = { { "ANGLIA", "Premier League" },
+			{ "FRANCJA", "Ligue 1" },
+			{ "HISZPANIA", "LaLiga" },
+			{ "NIEMCY", "Bundesliga" },
+			{ "POLSKA", "LOTTO Ekstraklasa" },
+			{ "WŁOCHY", "Serie A" },
+			{ "EUROPA", "Liga Mistrzów" },
+			{ "EUROPA", "Liga Europy" },
+			{"PORTUGALIA","Primeira Liga"} ,
+			{"AUSTRALIA","A-League"}};
 
 	/**Method to get loaded content of flashscore.com
 	 * @return loaded content of flashscore
