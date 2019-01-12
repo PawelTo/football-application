@@ -44,7 +44,6 @@ public class MatchFromWebDataCreator {
 	 */
 	private Club setTeamFromString(String nameOfClub) {
 		Club team =null;
-		System.out.println("Nazwa klubu: "+nameOfClub);
 		long id;
 		try {
 			id = Long.parseLong(nameOfClub);

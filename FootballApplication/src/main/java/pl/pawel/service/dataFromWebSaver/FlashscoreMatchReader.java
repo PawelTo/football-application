@@ -33,7 +33,7 @@ public class FlashscoreMatchReader implements WebMatchReader {
 	public HtmlPage getFlashscorePage() throws FailingHttpStatusCodeException, MalformedURLException, IOException {
 		WebClient webClient = new WebClient(BrowserVersion.FIREFOX_60);
 		HtmlPage fsPage = webClient.getPage(path);
-		webClient.waitForBackgroundJavaScript(30 * 1000);
+		webClient.waitForBackgroundJavaScript(40 * 1000);
 		webClient.close();
 		return fsPage;
 	}
