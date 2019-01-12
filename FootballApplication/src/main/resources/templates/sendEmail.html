@@ -12,7 +12,8 @@
 </head>
 <body>
 	<div>
-		<h2>Here you can type a message and send it to any e-mail address</h2>
+		<h2>Here you can type a message and send it to any e-mail address.</h2>
+		<h3>You can't choose attachment (it's a fixed file) - I'll improve it next versions of application</h3>
 		<form action="#" th:action="@{/sendEmail}" th:object="${email}" method="post">
 			<div class="form-group">
 				<label>Email address: </label><input th:field="*{address}" name="address">
