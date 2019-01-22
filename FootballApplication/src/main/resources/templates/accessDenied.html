@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pl-PL" xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Authorization page for Spring Security</title>
+<title>AccessDenied</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
@@ -15,20 +15,8 @@
 
 	<a href="/start" th:href="@{/start}"><button
 			class="btn btn-primary">Go To Start</button></a>
-
-	<!-- Place to insert login -->
-	<h1>Login</h1>
-	<p>Example user: User</p>
-	<p>Example password: USER</p>
-	<p>User role doesn't have credential to add match via input form, if you would like to add new match manually, you must use admin account</p>
-	<p>Admin</p>
-	<p>ADMIN</p>
-	<form th:action="@{/login}" method="post">
-		<label for="username">Username</label>: <input type="text"
-			id="username" name="username" autofocus="autofocus" /> <br /> <label
-			for="password">Password</label>: <input type="password" id="password"
-			name="password" /> <br /> <input type="submit" value="Log in" />
-	</form>
+			
+	<h1>You don't have permission to visit that page.</h1>
 
 	<!-- Scripts -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>

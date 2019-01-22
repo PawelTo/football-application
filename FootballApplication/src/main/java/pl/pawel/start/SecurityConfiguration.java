@@ -17,16 +17,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication().withUser("User").password("USER").roles("USER");
+		auth.inMemoryAuthentication().withUser("User").password("USER").roles("USER")
+		.and().withUser("Admin").password("ADMIN").roles("ADMIN");
 	}
 
 	/* 
-	 *Only login page in visible for all, rest need login process
+	 *Only login page i visible for all, rest need login process
 	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers("/login").permitAll()
-		.antMatchers("/*").hasRole("USER")
-		.and().formLogin().loginPage("/login").failureUrl("/login");
+		.antMatchers("/addNew").hasRole("ADMIN")
+		.antMatchers("/*").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
+		.anyRequest().authenticated() 
+		.and().formLogin().loginPage("/login").failureUrl("/login")
+		.and().exceptionHandling().accessDeniedPage("/accessDenied")
+		;
 	}
 }

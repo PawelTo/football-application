@@ -18,4 +18,12 @@ public class MainController {
 	public String loginPage() {
 		return "login";
 	}
+	
+	/**Method to return accessDenied HTML page
+	 * @return
+	 */
+	@RequestMapping("/accessDenied")
+	public String accessDeniedPage() {
+		return "accessDenied";
+	}
 }
