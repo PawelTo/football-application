@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="../static/css/testing.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.css">
 <title>File to input data to DB</title>
 </head>
 <body>
@@ -23,8 +25,8 @@
 				<label>Away Team Score</label> <input th:field="*{awayTeamScore}">
 			</div>
 			<div class="form-group">
-				<label>Date Of Game (DD-MM-RRRR)</label> <input
-					type="datetime-local" th:field="*{dateOfGame}">
+				<label>Date Of Game (DD-MM-RRRR)</label> <input data-provide="datepicker"
+					type="datetime-local" th:field="*{dateOfGame}" data-date-format="dd-mm-yyyy">
 			</div>
 			<div class="form-group">
 				<label>Attendance</label> <input th:field="*{attendance}">
@@ -35,5 +37,14 @@
 			<input type="submit" value="Add Game" />
 		</form>
 	</div>
+
+<!-- Only scripts -->  
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.js"></script>
 </body>
 </html>
