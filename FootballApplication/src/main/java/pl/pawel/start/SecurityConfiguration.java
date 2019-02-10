@@ -22,9 +22,6 @@ import pl.pawel.service.security.UserService;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-
-	/*@Autowired
-	private UserService userService;*/
 	
 	@Autowired
 	private DataSource dataSource;
@@ -34,17 +31,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		auth.inMemoryAuthentication().withUser("User").password("USER").roles("USER")
 		.and().withUser("Admin").password("ADMIN").roles("ADMIN");
 		
-		/*DaoAuthenticationProvider daoAuth = new DaoAuthenticationProvider();
-		BCryptPasswordEncoder passEncoder = new BCryptPasswordEncoder(11);
-		daoAuth.setUserDetailsService(userService);
-		daoAuth.setPasswordEncoder(passEncoder);*/
 		auth.jdbcAuthentication().dataSource(dataSource)
+		.passwordEncoder(new BCryptPasswordEncoder())
 		.usersByUsernameQuery("select username, password, TRUE as enabled from user_data where username=?")
 		.authoritiesByUsernameQuery("select username, role from user_data where username=?");
 	}
 
 	/* 
-	 *Only login page i visible for all, rest need login process
+	 *Only login and register pages are visible for all, rest need login process
 	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
