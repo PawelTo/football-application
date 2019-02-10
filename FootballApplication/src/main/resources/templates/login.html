@@ -20,6 +20,8 @@
 	<h1>Login</h1>
 	<p>Example user: User</p>
 	<p>Example password: USER</p>
+	<p>Example user with PasswordEncoder: USER2</p>
+	<p>Example password with PasswordEncoder: HashPass</p>
 	<p>User role doesn't have credential to add match via input form, if you would like to add new match manually, you must use admin account</p>
 	<p>Admin</p>
 	<p>ADMIN</p>
@@ -30,6 +32,10 @@
 			name="password" /> <br /> <input type="submit" value="Log in" />
 	</form>
 
+	<!-- Register -->
+	<p>
+		Click <a th:href="@{/register}">here</a> to create new account.
+	</p>
 	<!-- Scripts -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 	<script
