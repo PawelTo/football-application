@@ -31,10 +31,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		/*In memory authentication
-		 * 
-		 * auth.inMemoryAuthentication().withUser("User").password("USER").roles("USER")
-		.and().withUser("Admin").password("ADMIN").roles("ADMIN");*/
+		auth.inMemoryAuthentication().withUser("User").password("USER").roles("USER")
+		.and().withUser("Admin").password("ADMIN").roles("ADMIN");
 		
 		/*DaoAuthenticationProvider daoAuth = new DaoAuthenticationProvider();
 		BCryptPasswordEncoder passEncoder = new BCryptPasswordEncoder(11);
