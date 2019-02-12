@@ -33,8 +33,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		
 		auth.jdbcAuthentication().dataSource(dataSource)
 		.passwordEncoder(new BCryptPasswordEncoder())
-		.usersByUsernameQuery("select username, password, TRUE as enabled from user_data where username=?")
-		.authoritiesByUsernameQuery("select username, role from user_data where username=?");
+		.usersByUsernameQuery("select username, password, TRUE as enabled from auth_user_data where username=?")
+		.authoritiesByUsernameQuery("select username, role from auth_user_data where username=?");
 	}
 
 	/* 
@@ -42,7 +42,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/login","/register").permitAll()
+		http.authorizeRequests().antMatchers("/login","/register","/createUser").permitAll()
 		.antMatchers("/addNew").hasRole("ADMIN")
 		.antMatchers("/*").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
 		.anyRequest().authenticated() 
