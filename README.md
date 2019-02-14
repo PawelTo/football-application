@@ -8,7 +8,7 @@ The main technology used in application are:
 2. Preparing custom Query with JPQL and Native Query (using pure SQL)
 3. Tests with JUnit and Mockito 
 4. Frontend for users - HTML, JavaScrpt, Bootstrap, CSS and thymeleaf as template engine. (Frontend technology isn't main goal of that application, so I'm aware that it needs a lot of improvment, I hope I'll do this in nearest feature.
-5. Spring Security - authentication of users, who use such application (currently, there is only one admin user, who is allowed to use all feature)
+5. Spring Security - inMemory and JDBCauthentication with register process
 6. RestController to cooparate with JSON
 7. Basic Java logging API - SLF4J
 8. Feature to read data from file from supported formats: CSV, TXT, XLS, XLSX, XLSM - Apache POI library
