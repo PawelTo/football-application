@@ -16,3 +16,5 @@ The main technology used in application are:
 10. Sending emails - Spring-boot-starter-mail (it is necessary to configure your email account to send message)
 11. Uploading file from selected path to created folder
 12. HtmlUnit and Jsoup to web scraping data from football results website.
+13. Using AOP - just for learing reason.
+14. Using custom annotation and Reflection API to get metadata about it - just for learing reason.
