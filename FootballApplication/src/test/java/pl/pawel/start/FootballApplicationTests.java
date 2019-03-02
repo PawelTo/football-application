@@ -12,5 +12,4 @@ public class FootballApplicationTests {
 	@Test
 	public void contextLoads() {
 	}
-
 }
