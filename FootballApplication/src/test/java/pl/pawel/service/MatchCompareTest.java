@@ -2,13 +2,10 @@ package pl.pawel.service;
 
 import static org.junit.Assert.*;
 
-import java.sql.Date;
 import java.time.LocalDate;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import pl.pawel.model.Club;
 import pl.pawel.model.Competition;
 import pl.pawel.model.Match;
 
