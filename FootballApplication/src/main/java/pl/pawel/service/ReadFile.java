@@ -22,7 +22,7 @@ import java.io.IOException;
 
 public class ReadFile {
 
-	private static String path = "C:\\Users\\Pawel\\Desktop\\";
+	private static String path = "C:\\Users\\Pawel\\Desktop\\DirToLearn\\Files_To_Read\\";
 	private static String fileName = "Results.xlsx";
 	private BufferedReader bfReader;
 	private FileReader fileReader;
