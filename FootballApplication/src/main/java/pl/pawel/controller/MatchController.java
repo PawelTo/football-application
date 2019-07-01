@@ -33,6 +33,7 @@ import pl.pawel.service.dataFileSaver.FileSaver;
 import pl.pawel.service.dataFileSaver.IFileSaver;
 import pl.pawel.service.dataFileSaver.IFileSaverFactory;
 import pl.pawel.service.dataFileSaver.TXTFileSaver;
+import pl.pawel.service.dataFileSaver.XMLFileSaver;
 
 // If you send data to HTML views via HttpServletRequest.setAttribute the name
 // have to be the same as the name of the object in HTML file, if you use
@@ -133,7 +134,7 @@ public class MatchController {
 	 * @return
 	 */
 	@GetMapping("/csv")
-	public String saveToCSV() {
+	public String saveToFile_TEST() {
 		CSVFileSaver fileToSaveData = new CSVFileSaver();
 		Match game = matchService.findMatchByID(7);
 		fileToSaveData.saveMatch(game);
@@ -141,11 +142,13 @@ public class MatchController {
 		fileToSave.saveMatch(game);
 		ExcelFileSaver excelToSave = new ExcelFileSaver();
 		excelToSave.saveMatch(game);
+		XMLFileSaver xmlFileSaver = new XMLFileSaver();
+		xmlFileSaver.saveMatch(game);
 		return "start";
 	}
 
 	/**
-	 * TODO - need to improve, temporary metod to test saving list of data
+	 * TODO - need to improve, temporary method to test saving list of data
 	 * 
 	 * @param request
 	 * @return
@@ -163,6 +166,8 @@ public class MatchController {
 		cSVToSave.saveListOfMatches(listOfGames);
 		TXTFileSaver tXTToSave = new TXTFileSaver();
 		tXTToSave.saveListOfMatches(listOfGames);
+		XMLFileSaver xmlFileSaver = new XMLFileSaver();
+		xmlFileSaver.saveListOfMatches(listOfGames);
 		return "showGamesPick";
 	}
 
@@ -188,7 +193,7 @@ public class MatchController {
 	/**
 	 * Temporary method to try Single Page Application
 	 * 
-	 * @return HTML view with json
+	 * @return HTML view with JSON
 	 */
 	@GetMapping("/restMatch")
 	public String testOfSinglePageApplication() {

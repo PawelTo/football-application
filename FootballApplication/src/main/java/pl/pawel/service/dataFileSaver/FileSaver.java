@@ -33,6 +33,9 @@ public class FileSaver {
 		case "xlsx":
 			fileSaver = new ExcelFileSaver();
 			break;
+		case "XML":
+			fileSaver = new XMLFileSaver();
+			break;
 		default:
 			fileSaver = new ExcelFileSaver();
 			break;
