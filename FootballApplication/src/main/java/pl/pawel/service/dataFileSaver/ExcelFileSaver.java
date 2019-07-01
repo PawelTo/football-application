@@ -21,7 +21,7 @@ import pl.pawel.model.Match;
 
 public class ExcelFileSaver implements IFileSaver {
 
-	private String path = "C:\\Users\\Pawel\\Desktop\\";
+	private String path = "C:\\Users\\Pawel\\Desktop\\DirToLearn\\Saved_files\\";
 	private String fileName = "CreatedFile.xlsx";
 	private String sheetName = "Resuts of Games";
 	private Workbook workbook;

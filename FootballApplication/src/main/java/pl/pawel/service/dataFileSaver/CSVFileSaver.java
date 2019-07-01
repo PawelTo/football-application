@@ -16,7 +16,7 @@ public class CSVFileSaver implements IFileSaver {
 
 	private String separator = "	";
 	private String endOfLineMark = "\n";
-	private String path = "C:\\Users\\Pawel\\Desktop\\";
+	private String path = "C:\\Users\\Pawel\\Desktop\\DirToLearn\\Saved_files\\";
 	private String fileName = "CreatedFile.csv";
 	private FileWriter fileWriter;
 	private StringBuilder sb;
