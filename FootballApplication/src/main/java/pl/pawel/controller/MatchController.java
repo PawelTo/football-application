@@ -117,7 +117,7 @@ public class MatchController {
 		List<Match> listOfMatches = new ArrayList<>();
 		
 		List<String[]> dataFromFile = new ReadFile().getDataFromFile();
-		for (int i = 1; i < dataFromFile.size(); i++) {
+		for (int i = 0; i < dataFromFile.size(); i++) {
 			mfData.setDataFromFile(dataFromFile.get(i));
 			Match game = mfData.createMatch();
 			logger.info("Row - " + i + " - match: " + game);
