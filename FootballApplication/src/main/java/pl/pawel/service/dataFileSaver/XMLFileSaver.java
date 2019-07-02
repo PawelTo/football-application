@@ -128,6 +128,10 @@ public class XMLFileSaver implements IFileSaver {
 		competition.appendChild(document.createTextNode(game.getCompetition().getCompetitionName()));
 		match.appendChild(competition);
 		
+		Element attendance = document.createElement("Attendance");
+		attendance.appendChild(document.createTextNode(String.valueOf(game.getAttendance())));
+		match.appendChild(attendance);
+		
 		return match;
 	}
 }
