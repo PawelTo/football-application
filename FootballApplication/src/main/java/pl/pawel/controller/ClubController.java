@@ -1,5 +1,9 @@
 package pl.pawel.controller;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,5 +54,18 @@ public class ClubController {
 	@GetMapping("/rest")
 	public String testOfRest() {
 		return "restClub";
+	}
+	
+	@ResponseBody
+	@GetMapping("/streamExample")
+	public List<Club> streamTest(){
+		List<Club> clubList = new LinkedList<>();
+		for(int i=0;i<20;i++) {
+			clubList.add(new Club("nazwa"+i, "stadion"+i, i*15));
+		}
+		
+		List filtredList = clubList.stream().filter(c->c.getStadiumCapacity()>110).collect(Collectors.toList());
+		
+		return filtredList;
 	}
 }
