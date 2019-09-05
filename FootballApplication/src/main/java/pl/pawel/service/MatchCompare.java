@@ -1,9 +1,13 @@
 package pl.pawel.service;
 
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+import pl.pawel.model.Club;
 import pl.pawel.model.Match;
 
 public class MatchCompare {
@@ -55,4 +59,22 @@ public class MatchCompare {
 		return filteredMatches;
 	}
 
+	public List<Match> setMyClubsName(List<Match> matchesMyClub) {
+		List<Match> myClubMatches = matchesMyClub.stream().peek(m -> m.setHomeTeamScore(5))
+				.peek(m -> m.setHomeTeam(new Club("gospodarz", "stadion", 1235))).collect(Collectors.toList());
+		return myClubMatches;
+	}
+
+	public List<Integer> sumGoals(List<Match> matchesMyClub) {
+		List<Integer> map = matchesMyClub.stream().filter(m -> m.getAttendance() < 1500)
+				.peek(m -> m.setHomeTeamScore(15)).map(m -> m.getHomeTeamScore() + m.getAwayTeamScore())
+				.collect(Collectors.toList());
+		return map;
+	}
+
+	public Map<Integer,Match> getMatchMap(List<Match> matchesMyClub) {
+		Map<Integer, Match> mapMatch = matchesMyClub.stream().filter(m -> m.getAttendance() < 1500).
+				collect(Collectors.toMap(m->Integer.valueOf(m.getAttendance()), m->m));
+		return mapMatch;
+	}
 }
