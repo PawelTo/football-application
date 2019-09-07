@@ -49,4 +49,13 @@ public class StreamController {
 			matchesToEdit.add(new Match(null, null, null, i%4, i%3, null, i*123));
 		return new MatchCompare().getMatchMap(matchesToEdit);
 	}
+	
+	@ResponseBody
+	@GetMapping("/printMatches")
+	public List<Match> printMatches(){
+		List<Match> matchesToEdit = new LinkedList<>();
+		for(int i=0;i<10;i++)
+			matchesToEdit.add(new Match(null, null, null, i%4, i%3, null, i*123));
+		return new MatchCompare().printMatches(matchesToEdit);
+	}
 }

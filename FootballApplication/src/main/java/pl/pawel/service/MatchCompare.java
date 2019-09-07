@@ -72,9 +72,15 @@ public class MatchCompare {
 		return map;
 	}
 
-	public Map<Integer,Match> getMatchMap(List<Match> matchesMyClub) {
-		Map<Integer, Match> mapMatch = matchesMyClub.stream().filter(m -> m.getAttendance() < 1500).
-				collect(Collectors.toMap(m->Integer.valueOf(m.getAttendance()), m->m));
+	public Map<Integer, Match> getMatchMap(List<Match> matchesMyClub) {
+		Map<Integer, Match> mapMatch = matchesMyClub.stream().filter(m -> m.getAttendance() < 1500)
+				.collect(Collectors.toMap(m -> Integer.valueOf(m.getAttendance()), m -> m));
 		return mapMatch;
+	}
+
+	public List<Match> printMatches(List<Match> matchesMyClub) {
+		matchesMyClub.stream().filter(m -> m.getAttendance() < 1500)
+				.forEach(m -> m.setAttendance(m.getAwayTeamScore() + m.getHomeTeamScore()));
+		return matchesMyClub;
 	}
 }
