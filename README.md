@@ -6,7 +6,7 @@ What's more, I'm also aware that my project needs a lot of improvment, which I h
 The main technology used in application are:
 1. Simple CRUD application which enable users basic operations with PostgreSQL database - Spring Data
 2. Preparing custom Query with JPQL and Native Query (using pure SQL)
-3. Tests with JUnit and Mockito 
+3. Tests with JUnit and Mockito. Mocks are dummy objects, where we have describe results of testing methods, Spyies are real object, which offer real methods perfroming. @InjectMock enable to create object with some dependency, which are added as Mock. @MockBean are used to enable spring ApplicationContext.
 4. Frontend for users - HTML, JavaScrpt, Bootstrap, CSS and thymeleaf as template engine. (Frontend technology isn't main goal of that application, so I'm aware that it needs a lot of improvment, I hope I'll do this in nearest feature.
 5. Spring Security - inMemory and JDBCauthentication with register process
 6. RestController to cooparate with JSON
