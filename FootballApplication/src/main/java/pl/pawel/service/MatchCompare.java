@@ -1,17 +1,18 @@
 package pl.pawel.service;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import pl.pawel.model.Club;
 import pl.pawel.model.Match;
 
 public class MatchCompare {
 
+	private List<String> listToTestMockInjection;
+	
 	public int compareMatchesAttendance(Match m1, Match m2) {
 		int attendancedifference = Math.abs(m1.getAttendance() - m2.getAttendance());
 		System.out.println("M1: " + m1.getAttendance() + " M2: " + m2.getAttendance());
@@ -82,5 +83,35 @@ public class MatchCompare {
 		matchesMyClub.stream().filter(m -> m.getAttendance() < 1500)
 				.forEach(m -> m.setAttendance(m.getAwayTeamScore() + m.getHomeTeamScore()));
 		return matchesMyClub;
+	}
+
+	public List<Match> callInnerMethod(List<Match> matchesMyClub) {
+		return innerMethod(matchesMyClub);
+	}
+
+	private List<Match> innerMethod(List<Match> matchesMyClub) {
+		System.out.println("Do inner method");
+		innerPublicMethod();
+		matchesMyClub.stream().filter(m -> m.getAttendance() < 15000)
+				.forEach(m -> m.setAttendance(m.getAwayTeamScore() + m.getHomeTeamScore()));
+		return matchesMyClub;
+	}
+	
+	public void innerPublicMethod() {
+		System.out.println("Print public method");
+	}
+	
+	public String get0Match(){
+		if(listToTestMockInjection == null) {
+			listToTestMockInjection = new LinkedList<>();
+		}	
+		listToTestMockInjection.add("public");
+		privateGet1Match();
+		return listToTestMockInjection.get(0);
+	}
+	
+	private String privateGet1Match(){
+		listToTestMockInjection.add("private");
+		return listToTestMockInjection.get(1);
 	}
 }

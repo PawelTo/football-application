@@ -1,6 +1,5 @@
 package pl.pawel.service.competitionPointsCount;
 
-import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -11,7 +10,6 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
 
 import pl.pawel.model.Club;
 import pl.pawel.model.Competition;
